@@ -1,0 +1,22 @@
+# Name: en_US.lang
+# Author: SnowShock35
+# Credits: SnowShock35
+# Type (Language): English (US)
+
+# - General Localization
+itemGroup.GoldenTreasures=Golden Treasures
+
+# - Item Localization
+item.GoldenTreasures:golden_bomb.name=Golden Bomb
+item.GoldenTreasures:golden_chalice.name=Golden Chalice
+item.GoldenTreasures:golden_coin.name=Golden Coin
+item.GoldenTreasures:golden_food.name=Golden Food
+item.GoldenTreasures:golden_lantern.name=Golden Lantern
+item.GoldenTreasures:golden_lilypad.name=Golden Lily Pad
+item.GoldenTreasures:golden_miner.name=Golden Miner
+item.GoldenTreasures:golden_staff.name=Golden Staff
+item.GoldenTreasures:golden_torch.name=Golden Torch
+
+# - Block Localization
+tile.GoldenTreasures:tile.golden_lilypad.name=Golden Lily Pad
+tile.GoldenTreasures:tile.golden_torch.name=Golden Torch
