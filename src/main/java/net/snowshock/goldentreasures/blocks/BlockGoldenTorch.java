@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
@@ -12,9 +11,9 @@ import net.snowshock.goldentreasures.references.ReferencesConfigInfo;
 import net.snowshock.goldentreasures.references.ReferencesModBlocks;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
-import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
-
 import java.util.Random;
+
+import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
 
 public class BlockGoldenTorch extends BlockTorch {
 
@@ -59,23 +58,6 @@ public class BlockGoldenTorch extends BlockTorch {
             return;
 
         interdictionField.doInterdictionTick(world, x, y, z);
-    }
-
-    private void doInterdictionTick(World world, int x, int y, int z) {
-
-        interdictionField.doInterdictionTick(world, x, y, z);
-    }
-
-    /**
-     * Decides whether or not {@code entity} may be pushed by the torch.
-     *
-     * TODO Currently says that anything may be pushed. Will update to read a config later.
-     *
-     * @param entity Entity being tested for pushability
-     * @return true if the entity is allowed to be pushed
-     */
-    protected boolean canIPush(Entity entity) {
-        return interdictionField.canIPush(entity);
     }
 
     public int tickRate() {
