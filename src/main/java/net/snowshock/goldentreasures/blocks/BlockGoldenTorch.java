@@ -15,6 +15,8 @@ import net.snowshock.goldentreasures.references.ReferencesConfigInfo;
 import net.snowshock.goldentreasures.references.ReferencesModBlocks;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
+import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+
 import java.util.List;
 import java.util.Random;
 
@@ -39,10 +41,6 @@ public class BlockGoldenTorch extends BlockTorch {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
     @Override
