@@ -27,7 +27,7 @@ public class GoldenTreasures {
     @Mod.Metadata(ReferencesModInfo.MOD_ID)
     public static ModMetadata metadata;
 
-    @SidedProxy(clientSide = ReferencesModInfo.CLIENT_PROXY_PATH, serverSide = ReferencesModInfo.SERVER_PROXY_PATH)
+    @SidedProxy(clientSide = ReferencesModInfo.CLIENT_PROXY_CLASS, serverSide = ReferencesModInfo.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     public static CreativeTabs CREATIVE_TAB = new CreativeTabGoldenTreasures(CreativeTabs.getNextID(), ReferencesModInfo.MOD_ID);
