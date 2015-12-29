@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
+import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+
 public class BlockGoldenTreasures extends Block {
     public BlockGoldenTreasures(Material material) {
         super(material);
@@ -25,7 +27,5 @@ public class BlockGoldenTreasures extends Block {
         blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-    }
+
 }

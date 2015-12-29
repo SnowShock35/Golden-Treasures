@@ -26,6 +26,8 @@ import net.snowshock.goldentreasures.utils.ContentHelper;
 import java.util.List;
 import java.util.Random;
 
+import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+
 public class BlockGoldenLilypad extends BlockFlower {
     public BlockGoldenLilypad() {
         super(0);
@@ -54,10 +56,6 @@ public class BlockGoldenLilypad extends BlockFlower {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         return blockIcon;
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
     @Override
