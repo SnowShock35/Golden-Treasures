@@ -16,5 +16,5 @@ public class CreativeTabGoldenTreasures extends CreativeTabs {
     public Item getTabIconItem() {
         return Items.gold_ingot;
     }
-    
+
 }
