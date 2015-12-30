@@ -5,14 +5,42 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.snowshock.goldentreasures.references.ReferencesModInfo;
+import net.snowshock.goldentreasures.utils.EntityHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Map;
 
 public class InterdictionField {
+    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
     public final int fieldRadius;
 
-    public InterdictionField(int fieldRadius) {
+    final Map<EntityHelper.EntityType, Boolean> entityTypesEnabled;
+    final List<Class<? extends Entity>> whitelist;
+    final List<Class<? extends Entity>> blacklist;
+
+
+    public InterdictionField(int fieldRadius, Map<EntityHelper.EntityType, Boolean> entityTypeConfiguration, List<Class<? extends Entity>> whitelist, List<Class<? extends Entity>> blacklist) {
         this.fieldRadius = fieldRadius;
+        this.entityTypesEnabled = entityTypeConfiguration;
+        this.whitelist = whitelist;
+        this.blacklist = blacklist;
+        initEntityTypeValues(entityTypeConfiguration);
+    }
+
+    /**
+     * Sets any entity type which isn't present in {@code entityTypesEnabled} to false;
+     * @param entityTypesEnabled Entity type configuration map.
+     */
+    private void initEntityTypeValues(Map<EntityHelper.EntityType, Boolean> entityTypesEnabled) {
+        for(EntityHelper.EntityType type : EntityHelper.EntityType.values())  {
+            if(entityTypesEnabled.get(type) == null)
+            {
+                entityTypesEnabled.put(type, false);
+            }
+        }
     }
 
     public void doInterdictionTick(World world, int x, int y, int z) {
@@ -21,9 +49,11 @@ public class InterdictionField {
         List<Entity> entities = (List<Entity>) world.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius));
         for (Entity entity : entities) {
             if (canIPush(entity)) {
+                LOGGER.trace("Pushing entity [{}] of class [{}]", entity, entity.getClass());
                 double distance = entity.getDistance((double) x, (double) y, (double) z);
                 if (distance >= radius || distance == 0)
                     continue;
+
 
                 // the multiplier is based on a set rate added to an inverse
                 // proportion to the distance.
@@ -67,12 +97,17 @@ public class InterdictionField {
         if (entity instanceof EntityPlayer)
             return false;
         else {
-            //Class entityClass = entity.getClass();
-            //String entityName = (String) EntityList.classToStringMapping.get(entityClass);
-            //List<String> entitiesThatCanBePushed = (List<String>) ReferencesConfigInfo
-            //List<String> projectilesThatCanBePushed = (List<String>) ReferencesConfigInfo.GeneralConfigs.get(ReferencesModBlocks.GOLDEN_TORCH, "projectiles_that_can_be_pushed");
-            //ReferencesConfigInfo.GeneralConfigs.CAN_PROJECTILES_BE_PUSHED
-            return true;
+            final boolean canPush;
+            if (whitelist.contains(entity.getClass())) {
+                canPush = false;
+            } else if (blacklist.contains(getClass())) {
+                canPush = true;
+            } else {
+                final EntityHelper.EntityType type = EntityHelper.classify(entity);
+                canPush = entityTypesEnabled.get(type);
+            }
+            return canPush;
         }
+
     }
 }
