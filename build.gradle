@@ -21,6 +21,9 @@ version = "1.7.10-1.0.0"
 group = "net.snowshock.goldentreasures" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "GoldenTreasures"
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "run"
