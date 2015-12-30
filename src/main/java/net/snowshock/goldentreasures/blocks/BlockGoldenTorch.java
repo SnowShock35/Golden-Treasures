@@ -118,13 +118,16 @@ public class BlockGoldenTorch extends BlockTorch {
     }
 
     private boolean isStackOfMe(ItemStack equippedItem) {
-        final Item item = equippedItem.getItem();
-        final Block block = getBlockFrom(item);
-        return block != null && block.getClass().equals(BlockGoldenTorch.class);
+        if (equippedItem != null) {
+            final Item item = equippedItem.getItem();
+            final Block block = getBlockFrom(item);
+            return block != null && block.getClass().equals(BlockGoldenTorch.class);
+        } else
+            return false;
     }
 
     private Block getBlockFrom(Item item) {
-        if (item instanceof ItemBlock)
+        if (item != null && item instanceof ItemBlock)
             return ((ItemBlock) item).field_150939_a;
         else
             return null;
