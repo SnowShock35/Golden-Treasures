@@ -5,13 +5,9 @@
 
 ### Development Changes
 
-*
+* null
 
 ### Released Versions
-#### Golden Treasures-1.7.10-1.0.0
+##### Golden Treasures-1.7.10-1.0.0
 
-<<<<<<< HEAD
 * Initial Release \o/
-=======
-* Initial Release \o/
->>>>>>> origin/master
