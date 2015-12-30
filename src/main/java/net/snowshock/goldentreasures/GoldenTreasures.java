@@ -7,6 +7,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.snowshock.goldentreasures.init.InitModBlocks;
 import net.snowshock.goldentreasures.init.InitModItems;
@@ -40,7 +41,6 @@ public class GoldenTreasures {
         File configFile = event.getSuggestedConfigurationFile();
         ConfigHandler.init(configFile);
 
-
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
 
         metadata = MetadataHelper.transformMetadata(metadata);
@@ -63,6 +63,10 @@ public class GoldenTreasures {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         LOGGER.log(Level.INFO, "Post Initialization: Starting...");
+        if (Minecraft.isRunningOnMac) {
+            LOGGER.log(Level.DEBUG, "Warning: Pointless Message!");
+            LOGGER.log(Level.ERROR, "Mac User Detected! Exterminate! Exterminate! Exterminate!");
+        }
         LOGGER.log(Level.INFO, "Post Initialization: Complete");
     }
 }
