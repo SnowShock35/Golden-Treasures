@@ -1,3 +1,20 @@
+Skip to content
+This repository  
+Search
+Pull requests
+Issues
+Gist
+ @SnowShock35
+ Watch 1
+  Star 0
+ Fork 1 LyraelRayne/Golden-Treasures
+forked from SnowShock35/Golden-Treasures
+ Code  Pull requests 0  Wiki  Pulse  Graphs
+Branch: master Find file Copy pathGolden-Treasures/build.gradle
+f480824  6 minutes ago
+@LyraelRayne LyraelRayne Added java version to build.gradle
+2 contributors @LyraelRayne @SnowShock35
+RawBlameHistory     33 lines (27 sloc)  775 Bytes
 buildscript {
     repositories {
         mavenCentral()
@@ -21,9 +38,14 @@ version = "1.7.10-1.0.0"
 group = "net.snowshock.goldentreasures" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "GoldenTreasures"
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "run"
 }
 
 idea { module { inheritOutputDirs = true } }
+Status API Training Shop Blog About Pricing
+© 2015 GitHub, Inc. Terms Privacy Security Contact Help
