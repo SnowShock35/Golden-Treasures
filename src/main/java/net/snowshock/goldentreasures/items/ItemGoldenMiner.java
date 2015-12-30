@@ -6,12 +6,12 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
 
+
 public class ItemGoldenMiner extends ItemGoldenTreasures {
     public ItemGoldenMiner() {
         super();
         this.setUnlocalizedName(ReferencesModItems.GOLDEN_MINER);
         this.setMaxStackSize(1);
-        this.setMaxDamage(0);
         canRepair = false;
     }
 
