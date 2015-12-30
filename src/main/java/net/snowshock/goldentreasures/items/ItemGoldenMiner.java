@@ -7,18 +7,12 @@ import net.minecraft.item.ItemStack;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
 
 
-public class ItemGoldenMiner extends ItemGoldenTreasures {
+public class ItemGoldenMiner extends ItemGoldenTreasuresTogglable {
     public ItemGoldenMiner() {
         super();
         this.setUnlocalizedName(ReferencesModItems.GOLDEN_MINER);
         this.setMaxStackSize(1);
         canRepair = false;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack, int pass) {
-        return false;
     }
 
     @Override

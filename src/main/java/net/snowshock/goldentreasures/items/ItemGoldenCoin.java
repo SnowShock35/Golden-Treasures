@@ -16,12 +16,11 @@ import net.minecraft.world.World;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
 import net.snowshock.goldentreasures.utils.NBTHelper;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenCoin.*;
 
-public class ItemGoldenCoin extends ItemGoldenTreasures {
+public class ItemGoldenCoin extends ItemGoldenTreasuresTogglable {
     @SideOnly(Side.CLIENT)
     private IIcon iconOverlay;
 
@@ -31,12 +30,6 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
         this.setMaxStackSize(1);
         this.setMaxDamage(0);
         canRepair = false;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack, int pass) {
-        return NBTHelper.getBoolean("enabled", stack);
     }
 
     @Override
@@ -61,7 +54,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
 
     @Override
     public IIcon getIcon(ItemStack ist, int renderPass) {
-        final boolean enabled = NBTHelper.getBoolean("enabled", ist);
+        final boolean enabled = isEnabled(ist);
         if (enabled && renderPass == 1)
             return iconOverlay;
         else
@@ -79,7 +72,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
                 }
                 NBTHelper.setShort("soundTimer", ist, NBTHelper.getShort("soundTimer", ist) - 1);
             }
-        if (!NBTHelper.getBoolean("enabled", ist))
+        if (!isEnabled(ist))
             return;
         EntityPlayer player = null;
         if (entity instanceof EntityPlayer) {
@@ -92,9 +85,8 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
 
     private void scanForEntitiesInRange(World world, EntityPlayer player, double d) {
         List iList = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(player.posX - d, player.posY - d, player.posZ - d, player.posX + d, player.posY + d, player.posZ + d));
-        Iterator iterator = iList.iterator();
-        while (iterator.hasNext()) {
-            EntityItem item = (EntityItem) iterator.next();
+        for (Object anIList : iList) {
+            EntityItem item = (EntityItem) anIList;
             if (!checkForRoom(item.getEntityItem(), player)) {
                 continue;
             }
@@ -108,9 +100,8 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
             break;
         }
         List iList2 = world.getEntitiesWithinAABB(EntityXPOrb.class, AxisAlignedBB.getBoundingBox(player.posX - d, player.posY - d, player.posZ - d, player.posX + d, player.posY + d, player.posZ + d));
-        Iterator iterator2 = iList2.iterator();
-        while (iterator2.hasNext()) {
-            EntityXPOrb item = (EntityXPOrb) iterator2.next();
+        for (Object anIList2 : iList2) {
+            EntityXPOrb item = (EntityXPOrb) anIList2;
             if (player.xpCooldown > 0) {
                 player.xpCooldown = 0;
             }
@@ -190,7 +181,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
             if (!disabledAudio()) {
                 NBTHelper.setShort("soundTimer", ist, 6);
             }
-            NBTHelper.setBoolean("enabled", ist, !NBTHelper.getBoolean("enabled", ist));
+            toggleEnabled(ist);
         } else {
             player.setItemInUse(ist, this.getMaxItemUseDuration(ist));
         }

@@ -6,19 +6,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
 
-public class ItemGoldenChalice extends ItemGoldenTreasures {
+public class ItemGoldenChalice extends ItemGoldenTreasuresTogglable {
     public ItemGoldenChalice() {
         super();
         this.setUnlocalizedName(ReferencesModItems.GOLDEN_CHALICE);
         this.setMaxStackSize(1);
         this.setMaxDamage(0);
         canRepair = false;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack, int pass) {
-        return false;
     }
 
     @Override
