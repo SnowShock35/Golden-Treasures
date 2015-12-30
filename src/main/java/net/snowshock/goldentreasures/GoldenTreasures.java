@@ -37,8 +37,9 @@ public class GoldenTreasures {
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.log(Level.INFO, "Pre Initialization: Starting...");
 
-        new File("./config/" + ReferencesModInfo.MOD_ID).mkdirs();
-        ConfigHandler.init(new File("./config/" + ReferencesModInfo.MOD_ID + "/" + ReferencesModInfo.MOD_ID + ".cfg"));
+        File configFile = event.getSuggestedConfigurationFile();
+        ConfigHandler.init(configFile);
+
 
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
 
