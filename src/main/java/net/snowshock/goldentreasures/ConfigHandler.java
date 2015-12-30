@@ -13,8 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.util.*;
 
-import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.ConfigCategories;
-import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenTorch;
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
 import static net.snowshock.goldentreasures.utils.EntityHelper.resolveEntityClass;
 
 
@@ -33,10 +32,23 @@ public class ConfigHandler {
     private static void loadConfiguration() {
         loadGeneralSettings();
         loadGoldenTorchSettings();
+        loadGoldenCoinSettings();
 
         if (configuration.hasChanged()) {
             configuration.save();
         }
+    }
+
+    private static void loadGoldenCoinSettings() {
+        final String category = ConfigCategories.GOLDEN_COIN;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_COIN_COMMENT);
+        GoldenCoin.LONG_PULL_DISTANCE = configuration.getInt("long_pull_distance", category, 25, 0, 64,
+                "Distance the coin will pull items whilst being used (holding right mouse button).");
+        GoldenCoin.STANDARD_PULL_DISTANCE = configuration.getInt("standard_pull_distance", category, 5, 0, 64,
+                "Distance the coin will pull items whilst activated.");
+        GoldenCoin.AUDIO_DISABLED = configuration.getBoolean("audio_disabled", category, false,
+                "Disable audio when item is activated?");
     }
 
     private static void loadGeneralSettings() {
@@ -45,25 +57,31 @@ public class ConfigHandler {
     }
 
     private static void loadGoldenTorchSettings() {
-
+        final String category = ConfigCategories.GOLDEN_TORCH;
         configuration.setCategoryRequiresMcRestart(ConfigCategories.GOLDEN_TORCH, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_TORCH_COMMENT);
 
-        final String goldenTorchSubCategory = ConfigCategories.GOLDEN_TORCH;
-        final String goldenTorchComment = ConfigCategories.GOLDEN_TORCH_COMMENT;
-        configuration.setCategoryComment(goldenTorchSubCategory, goldenTorchComment);
+        final int pushRadius = configuration.getInt("push_radius", category, 5, 1, 10,
+                "Range of the golden torch's interdiction effect.");
+        final Map<EntityHelper.EntityType, Boolean> entityTypeConfiguration = new HashMap<>();
+        entityTypeConfiguration.put(EntityHelper.EntityType.PROJECTILE,
+                configuration.getBoolean("projectiles_enabled", category, false, "Can projectiles be pushed?"));
+        entityTypeConfiguration.put(EntityHelper.EntityType.HOSTILE,
+                configuration.getBoolean("hostile_enabled", category, true, "Can hostile mobs be pushed?"));
+        entityTypeConfiguration.put(EntityHelper.EntityType.PASSIVE,
+                configuration.getBoolean("passive_enabled", category, false, "Can passive mobs be pushed?"));
+        entityTypeConfiguration.put(EntityHelper.EntityType.TC_GOLEM,
+                configuration.getBoolean("thaumcraft_golems_enabled", category, false,
+                        "Can Thaumcraft golems mobs be pushed?"));
+        entityTypeConfiguration.put(EntityHelper.EntityType.OTHER, false);
 
-        final int pushRadius = configuration.getInt("push_radius", goldenTorchSubCategory, 5, 1, 10, "Range of the golden torch's interdiction effect.");
-        final Map<EntityHelper.EntityType, Boolean> goldenTorchEntityTypeConfiguration = new HashMap<>();
-        goldenTorchEntityTypeConfiguration.put(EntityHelper.EntityType.PROJECTILE, configuration.getBoolean("projectiles_enabled", goldenTorchSubCategory, false, "Can projectiles be pushed?"));
-        goldenTorchEntityTypeConfiguration.put(EntityHelper.EntityType.HOSTILE, configuration.getBoolean("hostile_enabled", goldenTorchSubCategory, true, "Can hostile mobs be pushed?"));
-        goldenTorchEntityTypeConfiguration.put(EntityHelper.EntityType.PASSIVE, configuration.getBoolean("passive_enabled", goldenTorchSubCategory, false, "Can passive mobs be pushed?"));
-        goldenTorchEntityTypeConfiguration.put(EntityHelper.EntityType.TC_GOLEM, configuration.getBoolean("thaumcraft_golems_enabled", goldenTorchSubCategory, false, "Can Thaumcraft golems mobs be pushed?"));
-        goldenTorchEntityTypeConfiguration.put(EntityHelper.EntityType.OTHER, false);
+        List<Class<? extends Entity>> entityBlacklist = loadEntityClassList("blacklist", category,
+                "List of mobs that interdiction fields should NEVER push", new String[]{});
+        List<Class<? extends Entity>> entityWhitelist = loadEntityClassList("whiteList", category,
+                "List of mobs that interdiction fields should ALWAYS push", new String[]{});
 
-        List<Class<? extends Entity>> entityBlacklist = loadEntityClassList("blacklist", goldenTorchSubCategory, "List of mobs that interdiction fields should NEVER push", new String[]{});
-        List<Class<? extends Entity>> entityWhitelist = loadEntityClassList("whiteList", goldenTorchSubCategory, "List of mobs that interdiction fields should ALWAYS push", new String[]{});
-
-        GoldenTorch.interdictionField = new InterdictionField(pushRadius, goldenTorchEntityTypeConfiguration, entityWhitelist, entityBlacklist);
+        GoldenTorch.interdictionField = new InterdictionField(pushRadius, entityTypeConfiguration,
+                entityWhitelist, entityBlacklist);
     }
 
 

@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +19,7 @@ import net.snowshock.goldentreasures.utils.NBTHelper;
 import java.util.Iterator;
 import java.util.List;
 
-import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenCoin.*;
 
 public class ItemGoldenCoin extends ItemGoldenTreasures {
     @SideOnly(Side.CLIENT)
@@ -168,11 +167,11 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
     }
 
     public double getLongRangePullDistance() {
-        return (double) 15;
+        return (double) LONG_PULL_DISTANCE;
     }
 
     public double getStandardPullDistance() {
-        return (double) 5;
+        return (double) STANDARD_PULL_DISTANCE;
     }
 
     @Override
@@ -199,7 +198,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasures {
     }
 
     private boolean disabledAudio() {
-        return false;
+        return AUDIO_DISABLED;
     }
 
 }
