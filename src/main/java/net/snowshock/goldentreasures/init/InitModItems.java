@@ -15,7 +15,6 @@ public class InitModItems {
     //    public static final ItemGoldenTreasures golden_lilypad = new ItemGoldenLilypad();
     public static final ItemGoldenTreasures golden_miner = new ItemGoldenMiner();
     public static final ItemGoldenTreasures golden_staff = new ItemGoldenStaff();
-    public static final ItemGoldenTreasures golden_torch = new ItemGoldenTorch();
 
     public static void init() {
         GameRegistry.registerItem(golden_bomb, ReferencesModItems.GOLDEN_BOMB);
@@ -26,6 +25,5 @@ public class InitModItems {
 //        GameRegistry.registerItem(golden_lilypad, ReferencesModItems.GOLDEN_LILYPAD);
         GameRegistry.registerItem(golden_miner, ReferencesModItems.GOLDEN_MINER);
         GameRegistry.registerItem(golden_staff, ReferencesModItems.GOLDEN_STAFF);
-        GameRegistry.registerItem(golden_torch, ReferencesModItems.GOLDEN_TORCH);
     }
 }

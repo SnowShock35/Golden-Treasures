@@ -26,7 +26,7 @@ public class ItemGoldenTreasures extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(":") + 1));
+        itemIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
     protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
