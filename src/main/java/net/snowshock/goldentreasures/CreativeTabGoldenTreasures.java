@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
 public class CreativeTabGoldenTreasures extends CreativeTabs {
     public CreativeTabGoldenTreasures(int ID, String langName) {
@@ -17,8 +16,5 @@ public class CreativeTabGoldenTreasures extends CreativeTabs {
     public Item getTabIconItem() {
         return Items.gold_ingot;
     }
-
-    public String getTranslatedTabLable() {
-        return ReferencesModInfo.MOD_ID;
-    }
+    
 }
