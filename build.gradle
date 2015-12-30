@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = "1.7.10-1.0.0"
 group = "net.snowshock.goldentreasures" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "GoldenTreasures"
+archivesBaseName = "GoldenTreasures" //Because I like a CAPITALIZED jar file, okay!
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
