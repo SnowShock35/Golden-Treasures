@@ -56,7 +56,7 @@ public class ConfigHandler {
         GoldenStaff.TILE_PER_COST_MULTIPLIER = configuration.getInt("tile_per_cost_multiplier", category, 6, 6, 30,
                 "Multiplier determining how many extra torches will be consumed per unit of distance from the player.");
         GoldenStaff.TORCHES = loadTorchList("torches", category,
-                "List of items supported as torches for the golen staff.", new String[]{"torch"});
+                "List of items supported as torches for the golden staff.", new String[]{"torch"});
     }
 
 
