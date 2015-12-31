@@ -14,6 +14,7 @@ import net.snowshock.goldentreasures.interdiction.InterdictionField;
 import net.snowshock.goldentreasures.items.IHeldBlockAction;
 import net.snowshock.goldentreasures.references.ReferencesModBlocks;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
+import net.snowshock.goldentreasures.utils.ContentHelper;
 
 import java.util.Random;
 
@@ -106,11 +107,14 @@ public class BlockGoldenTorch extends BlockTorch implements IHeldBlockAction {
         if (player == null)
             return;
 
-        int blockX = MathHelper.floor_double(player.posX);
-        int blockY = MathHelper.floor_double(player.posY - player.getYOffset());
-        int blockZ = MathHelper.floor_double(player.posZ);
+        final ItemStack currentEquippedItem = player.getCurrentEquippedItem();
+        if (ContentHelper.areItemsEqual(currentEquippedItem.getItem(), ist.getItem())) {
+            int blockX = MathHelper.floor_double(player.posX);
+            int blockY = MathHelper.floor_double(player.posY - player.getYOffset());
+            int blockZ = MathHelper.floor_double(player.posZ);
 
-        interdictionField.doInterdictionTick(world, blockX, blockY, blockZ);
+            interdictionField.doInterdictionTick(world, blockX, blockY, blockZ);
+        }
     }
 
     private boolean isClientSide(World world) {
