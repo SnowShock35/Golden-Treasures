@@ -37,10 +37,24 @@ public class ConfigHandler {
         loadGoldenLanternSettings();
         loadGoldenStaffSettings();
         loadGoldenMinerSettings();
+        loadGoldenLilypadSettings();
 
         if (configuration.hasChanged()) {
             configuration.save();
         }
+    }
+
+    private static void loadGoldenLilypadSettings() {
+        final String category = ConfigCategories.GOLDEN_LILYPAD;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_LILYPAD_COMMENT);
+
+        GoldenLilypad.SECONDS_BETWEEN_GROWTH_TICKS = configuration.getInt("seconds_between_growth_ticks", category, 47, 1, 9999,
+                "Interval between growth ticks in seconds.");
+        GoldenLilypad.TILE_RANGE = configuration.getInt("tile_range", category, 4, 1, 15,
+                "Range at which the lilypad will operate at partial potency.");
+        GoldenLilypad.FULL_POTENCY_RANGE = configuration.getInt("full_potency_range", category, 1, 1, 15,
+                "Range at which the lilypad will operate at full potency.");
     }
 
     private static void loadGoldenMinerSettings() {

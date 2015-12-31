@@ -3,34 +3,36 @@ package net.snowshock.goldentreasures.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLilyPad;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.references.ReferencesModBlocks;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
-import net.snowshock.goldentreasures.utils.ContentHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Random;
 
-import static net.snowshock.goldentreasures.utils.LanguageHelper.unwrapUnlocalizedName;
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenLilypad.*;
 
-public class BlockGoldenLilypad extends BlockFlower {
+
+public class BlockGoldenLilypad extends BlockGoldenTreasures {
+
+    public static final int SECONDS_PER_TICK = 20;
+    public static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".GoldenLilypad");
+
     public BlockGoldenLilypad() {
-        super(0);
+        super(Material.plants);
         float var3 = 0.5F;
         float var4 = 0.015625F;
         this.setTickRandomly(false);
@@ -41,44 +43,57 @@ public class BlockGoldenLilypad extends BlockFlower {
         this.setCreativeTab(GoldenTreasures.CREATIVE_TAB);
     }
 
+    /**
+     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     */
     @Override
-    public String getUnlocalizedName() {
-        return String.format("tile.%s%s", ReferencesModInfo.MOD_ID + ":", unwrapUnlocalizedName(super.getUnlocalizedName()));
+    public boolean isOpaqueCube()
+    {
+        return false;
     }
 
+    /**
+     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+     */
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon(String.format("%s", unwrapUnlocalizedName(this.getUnlocalizedName())));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta) {
-        return blockIcon;
+    public boolean renderAsNormalBlock()
+    {
+        return false;
     }
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random par5Random) {
-
+        LOGGER.debug("Ticking lilypad at [{},{},{}]", x, y, z);
+        final Block block = world.getBlock(x, y, z);
+        LOGGER.debug("Block is [{}]", block);
         this.growCropsNearby(world, x, y, z);
+        world.scheduleBlockUpdate(x, y, z, block, secondsBetweenGrowthTicks() * 20);
     }
 
     @Override
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
+        final int superResult = super.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, meta);
+        world.scheduleBlockUpdate(x, y, z, this, secondsBetweenGrowthTicks() * SECONDS_PER_TICK);
+        return superResult;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         world.spawnParticle("mobSpell", x + 0.5D + rand.nextGaussian() / 8, y, z + 0.5D + rand.nextGaussian() / 8, 0.0D, 0.9D, 0.5D);
     }
 
     private int secondsBetweenGrowthTicks() {
-        return 100;
+        return SECONDS_BETWEEN_GROWTH_TICKS;
     }
 
     private int tileRange() {
-        return 4;
+        return TILE_RANGE;
     }
 
     private int fullPotencyRange() {
-        return 0;
+        return FULL_POTENCY_RANGE;
     }
 
     public void growCropsNearby(World world, int xO, int yO, int zO) {
@@ -106,7 +121,6 @@ public class BlockGoldenLilypad extends BlockFlower {
                 }
             }
         }
-        world.scheduleBlockUpdate(xO, yO, zO, world.getBlock(xO, yO, zO), secondsBetweenGrowthTicks() * 20);
     }
 
     @Override
@@ -128,11 +142,6 @@ public class BlockGoldenLilypad extends BlockFlower {
     }
 
     @Override
-    protected boolean canPlaceBlockOn(Block block) {
-        return block != null && ContentHelper.areBlocksEqual(block, Blocks.water);
-    }
-
-    @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return y >= 0 && y < 256 && world.getBlock(x, y - 1, z).getMaterial() == Material.water && world.getBlockMetadata(x, y - 1, z) == 0;
     }
@@ -141,4 +150,13 @@ public class BlockGoldenLilypad extends BlockFlower {
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         list.add(new ItemStack(item, 1));
     }
+
+    /**
+     * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
+     */
+    public boolean canPlaceBlockAt(World world, int x, int y, int z)
+    {
+        return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z);
+    }
+
 }

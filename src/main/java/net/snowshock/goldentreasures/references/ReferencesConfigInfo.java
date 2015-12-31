@@ -22,9 +22,17 @@ public class ReferencesConfigInfo {
         public static final String GOLDEN_STAFF_COMMENT = "Configuration options for the golden staff.";
         public static final String GOLDEN_MINER ="GoldenMiner";
         public static final String GOLDEN_MINER_COMMENT = "Configuration options for the golden miner.";
+        public static final String GOLDEN_LILYPAD ="GoldenLilypad";
+        public static final String GOLDEN_LILYPAD_COMMENT = "Configuration options for the golden lilypad.";
     }
 
     public static final class GeneralConfigs {
+    }
+
+    public static final class GoldenLilypad {
+        public static int SECONDS_BETWEEN_GROWTH_TICKS = 47;
+        public static int TILE_RANGE = 4;
+        public static int FULL_POTENCY_RANGE = 1;
     }
 
     public static final class GoldenMiner {
