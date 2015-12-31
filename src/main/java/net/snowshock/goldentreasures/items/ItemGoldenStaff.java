@@ -31,6 +31,10 @@ import java.util.List;
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenStaff.*;
 
 public class ItemGoldenStaff extends ItemGoldenTreasuresTogglable {
+    private List<Item> torchItemList = null;
+    private Object torchLock = new Object();
+
+
     public ItemGoldenStaff() {
         super();
         this.setUnlocalizedName(ReferencesModItems.GOLDEN_STAFF);
@@ -62,25 +66,18 @@ public class ItemGoldenStaff extends ItemGoldenTreasuresTogglable {
             return false;
         if (entityLiving.isSneaking()) {
             cycleTorchMode(ist);
+            final Object golden_torch = ContentHelper.getItem("GoldenTreasures:tile.golden_torch");
+            if (golden_torch != null)
+                System.out.println(golden_torch.toString());
+            else
+                System.out.println("null");
             return true;
         }
         return false;
     }
 
     private void scanForMatchingTorchesToFillInternalStorage(ItemStack ist, EntityPlayer player) {
-
-        List<Item> items = new ArrayList<>();
-
-        //default to always work with vanilla torches
-        ItemStack vanillaTorch = new ItemStack(Blocks.torch, 1, 0);
-        items.add(vanillaTorch.getItem());
-
-        for (Item torchItem : TORCHES) {
-            if (!items.contains(torchItem))
-                items.add(torchItem);
-        }
-
-        for (Item item : items) {
+        for (Item item : getTorchItemList()) {
             if (!isInternalStorageFullOfItem(ist, item) && InventoryHelper.consumeItem(item, player)) {
                 addItemToInternalStorage(ist, item);
             }
@@ -453,5 +450,22 @@ public class ItemGoldenStaff extends ItemGoldenTreasuresTogglable {
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.epic;
+    }
+
+    public List<Item> getTorchItemList() {
+        if (torchItemList == null) {
+            synchronized (torchLock) {
+                torchItemList = new ArrayList<>();
+                torchItemList.add(new ItemStack(Blocks.torch, 1, 0).getItem());
+
+                for (String itemName : TORCHES) {
+                    final Item item = ContentHelper.getItem(itemName);
+                    if (item != null)
+                        torchItemList.add(item);
+                }
+            }
+        }
+
+        return torchItemList;
     }
 }

@@ -28,8 +28,7 @@ public class ReferencesConfigInfo {
         public static int MAX_RANGE = 30;
         public static int TILE_PER_COST_MULTIPLIER = 6;
         public static int MAX_CAPACITY_PER_ITEM_TYPE = 1500;
-        public static List<Item> TORCHES = ImmutableList.of();
-
+        public static List<String> TORCHES = ImmutableList.of();
     }
 
     public static final class GoldenLantern {

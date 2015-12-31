@@ -55,8 +55,9 @@ public class ConfigHandler {
                 "Maximum number of each type of torch the golden staff can hold.");
         GoldenStaff.TILE_PER_COST_MULTIPLIER = configuration.getInt("tile_per_cost_multiplier", category, 6, 6, 30,
                 "Multiplier determining how many extra torches will be consumed per unit of distance from the player.");
-        GoldenStaff.TORCHES = loadTorchList("torches", category,
-                "List of items supported as torches for the golden staff.", new String[]{"torch"});
+        GoldenStaff.TORCHES = Arrays.asList(configuration.getStringList("torches", category, new String[]{},
+                "List of items (other than vanilla torch) supported as torches for the golden staff."));
+        GoldenStaff.HUD_POSITION = configuration.getInt("hud_position", category, 3, 1, 4, "Position of HUD on screen");
     }
 
 
@@ -117,29 +118,6 @@ public class ConfigHandler {
 
         GoldenTorch.interdictionField = new InterdictionField(pushRadius, entityTypeConfiguration,
                 entityWhitelist, entityBlacklist);
-    }
-
-
-    private static List<Item> loadTorchList(String name, String category, String comment, String[] defaults) {
-        LOGGER.info("Loading entity class list [{}]", name);
-        List<String> itemNames = Arrays.asList(configuration.getStringList(name, category, defaults, comment));
-
-        if (!itemNames.contains("torch"))
-            itemNames.add(0, "torch");
-
-        List<Item> result = new ArrayList<>();
-        for (String itemName : itemNames) {
-            // Prepend : if it's bare so that contenthelper doesn't try to resolve it to this mod's item.
-            if(!itemName.contains(":"))
-                itemName = ":" + itemName;
-
-            final Item item = ContentHelper.getItem(itemName);
-            if(item != null)
-                result.add(item);
-            else
-                LOGGER.warn("Could not add item [{}] to torch list . Item not found.", itemName);
-        }
-        return result;
     }
 
     private static List<Class<? extends Entity>> loadEntityClassList(String name, String category, String comment, String[] defaults) {
