@@ -108,6 +108,9 @@ public class BlockGoldenTorch extends BlockTorch implements IHeldBlockAction {
             return;
 
         final ItemStack currentEquippedItem = player.getCurrentEquippedItem();
+        if(currentEquippedItem == null)
+            return;
+
         if (ContentHelper.areItemsEqual(currentEquippedItem.getItem(), ist.getItem())) {
             int blockX = MathHelper.floor_double(player.posX);
             int blockY = MathHelper.floor_double(player.posY - player.getYOffset());
