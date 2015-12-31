@@ -49,7 +49,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasuresTogglable {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         super.registerIcons(iconRegister);
-        iconOverlay = iconRegister.registerIcon(String.format("%s_overlay", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+        iconOverlay = iconRegister.registerIcon(String.format("%s_overlay", unwrapUnlocalizedName(this.getUnlocalizedName())));
     }
 
     @Override

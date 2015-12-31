@@ -95,7 +95,7 @@ public class LanguageHelper {
         }
     }
 
-    public static String getUnwrappedUnlocalizedName(String unlocalizedName) {
+    public static String unwrapUnlocalizedName(String unlocalizedName) {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 }

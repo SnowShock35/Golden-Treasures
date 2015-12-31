@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
+import net.snowshock.goldentreasures.utils.LanguageHelper;
 
 public class ItemGoldenFood extends ItemFood {
     public ItemGoldenFood() {
@@ -25,21 +26,21 @@ public class ItemGoldenFood extends ItemFood {
 
     @Override
     public String getUnlocalizedName() {
-        return String.format("item.%s%s", ReferencesModInfo.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s%s", ReferencesModInfo.MOD_ID + ":", unwrapUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public String getUnlocalizedName(ItemStack itemStack) {
-        return String.format("item.%s%s", ReferencesModInfo.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s%s", ReferencesModInfo.MOD_ID + ":", unwrapUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+        itemIcon = iconRegister.registerIcon(String.format("%s", unwrapUnlocalizedName(this.getUnlocalizedName())));
     }
 
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    protected String unwrapUnlocalizedName(String unlocalizedName) {
+        return LanguageHelper.unwrapUnlocalizedName(unlocalizedName);
     }
 
     @Override

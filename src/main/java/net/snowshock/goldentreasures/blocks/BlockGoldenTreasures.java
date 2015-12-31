@@ -11,8 +11,7 @@ import net.minecraft.world.World;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.items.IHeldBlockAction;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
-
-import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
+import net.snowshock.goldentreasures.utils.LanguageHelper;
 
 public class BlockGoldenTreasures extends Block implements IHeldBlockAction {
 
@@ -26,13 +25,17 @@ public class BlockGoldenTreasures extends Block implements IHeldBlockAction {
 
     @Override
     public String getUnlocalizedName() {
-        return String.format("tile.%s%s", ReferencesModInfo.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("tile.%s%s", ReferencesModInfo.MOD_ID + ":", unwrapUnlocalizedName(super.getUnlocalizedName()));
+    }
+
+    private String unwrapUnlocalizedName(String unlocalizedName) {
+        return LanguageHelper.unwrapUnlocalizedName(unlocalizedName);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+        blockIcon = iconRegister.registerIcon(String.format("%s", unwrapUnlocalizedName(this.getUnlocalizedName())));
     }
 
     public void doHeldItemUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {

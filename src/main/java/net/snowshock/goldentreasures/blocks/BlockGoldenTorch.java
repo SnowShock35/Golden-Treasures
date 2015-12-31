@@ -18,7 +18,7 @@ import net.snowshock.goldentreasures.utils.ContentHelper;
 
 import java.util.Random;
 
-import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
+import static net.snowshock.goldentreasures.utils.LanguageHelper.unwrapUnlocalizedName;
 
 public class BlockGoldenTorch extends BlockTorch implements IHeldBlockAction {
 
@@ -39,13 +39,13 @@ public class BlockGoldenTorch extends BlockTorch implements IHeldBlockAction {
 
     @Override
     public String getUnlocalizedName() {
-        return String.format("tile.%s%s", ReferencesModInfo.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("tile.%s%s", ReferencesModInfo.MOD_ID + ":", unwrapUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+        blockIcon = iconRegister.registerIcon(String.format("%s", unwrapUnlocalizedName(this.getUnlocalizedName())));
     }
 
     @Override
