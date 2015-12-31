@@ -13,16 +13,17 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Map;
 
+import static net.snowshock.goldentreasures.utils.EntityHelper.resolveEntityName;
+
 public class InterdictionField {
     private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
     public final int fieldRadius;
 
     final Map<EntityHelper.EntityType, Boolean> entityTypesEnabled;
-    final List<Class<? extends Entity>> whitelist;
-    final List<Class<? extends Entity>> blacklist;
+    List<String> whitelist;
+    List<String> blacklist;
 
-
-    public InterdictionField(int fieldRadius, Map<EntityHelper.EntityType, Boolean> entityTypeConfiguration, List<Class<? extends Entity>> whitelist, List<Class<? extends Entity>> blacklist) {
+    public InterdictionField(int fieldRadius, Map<EntityHelper.EntityType, Boolean> entityTypeConfiguration, List<String> whitelist, List<String> blacklist) {
         this.fieldRadius = fieldRadius;
         this.entityTypesEnabled = entityTypeConfiguration;
         this.whitelist = whitelist;
@@ -32,12 +33,12 @@ public class InterdictionField {
 
     /**
      * Sets any entity type which isn't present in {@code entityTypesEnabled} to false;
+     *
      * @param entityTypesEnabled Entity type configuration map.
      */
     private void initEntityTypeValues(Map<EntityHelper.EntityType, Boolean> entityTypesEnabled) {
-        for(EntityHelper.EntityType type : EntityHelper.EntityType.values())  {
-            if(entityTypesEnabled.get(type) == null)
-            {
+        for (EntityHelper.EntityType type : EntityHelper.EntityType.values()) {
+            if (entityTypesEnabled.get(type) == null) {
                 entityTypesEnabled.put(type, false);
             }
         }
@@ -98,9 +99,10 @@ public class InterdictionField {
             return false;
         else {
             final boolean canPush;
-            if (whitelist.contains(entity.getClass())) {
+            final String entityName = resolveEntityName(entity);
+            if (whitelist.contains(entityName)) {
                 canPush = false;
-            } else if (blacklist.contains(getClass())) {
+            } else if (blacklist.contains(entityName)) {
                 canPush = true;
             } else {
                 final EntityHelper.EntityType type = EntityHelper.classify(entity);
@@ -108,6 +110,5 @@ public class InterdictionField {
             }
             return canPush;
         }
-
     }
 }

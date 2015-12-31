@@ -39,9 +39,21 @@ public class EntityHelper {
     }
 
     /**
+     * Convert an entity instance to the entity name as stored in {@link EntityList}.
+     *
+     * @param entity Entity to resolve the name of.
+     *
+     * @return The entity name for that entity type (not entity instance).
+     */
+    public static String resolveEntityName(Entity entity)
+    {
+        return resolveEntityName(entity.getClass());
+    }
+
+    /**
      * Convert an entity class to the entity name as stored in {@link EntityList}.
      *
-     * @param clazz Class of the entity to test.
+     * @param clazz Entity class to resolve the name of.
      *
      * @return The entity name for that entity type (not entity instance).
      */

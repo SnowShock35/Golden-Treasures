@@ -110,12 +110,10 @@ public class ConfigHandler {
                 configuration.getBoolean("thaumcraft_golems_enabled", category, false,
                         "Can Thaumcraft golems mobs be pushed?"));
         entityTypeConfiguration.put(EntityHelper.EntityType.OTHER, false);
-
-        List<Class<? extends Entity>> entityBlacklist = loadEntityClassList("blacklist", category,
-                "List of mobs that interdiction fields should NEVER push", new String[]{});
-        List<Class<? extends Entity>> entityWhitelist = loadEntityClassList("whiteList", category,
-                "List of mobs that interdiction fields should ALWAYS push", new String[]{});
-
+        List<String> entityBlacklist = Arrays.asList(configuration.getStringList("blacklist", category, new String[]{},
+                "List of entities that golden torch should NEVER push"));
+        List<String> entityWhitelist = Arrays.asList(configuration.getStringList("whiteList", category, new String[]{},
+                "List of entities that golden torch should ALWAYS push"));
         GoldenTorch.interdictionField = new InterdictionField(pushRadius, entityTypeConfiguration,
                 entityWhitelist, entityBlacklist);
     }
