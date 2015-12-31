@@ -21,8 +21,6 @@ import static net.snowshock.goldentreasures.utils.EntityHelper.resolveEntityClas
 public class ConfigHandler {
     public static Configuration configuration;
 
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
-
     public static void init(File configFile) {
         if (configuration == null) {
             configuration = new Configuration(configFile);
@@ -152,17 +150,6 @@ public class ConfigHandler {
                 "List of entities that golden torch should ALWAYS push"));
         GoldenTorch.interdictionField = new InterdictionField(pushRadius, entityTypeConfiguration,
                 entityWhitelist, entityBlacklist);
-    }
-
-    private static List<Class<? extends Entity>> loadEntityClassList(String name, String category, String comment, String[] defaults) {
-        LOGGER.info("Loading entity class list [{}]", name);
-        List<String> entityNames = Arrays.asList(configuration.getStringList(name, category, defaults, comment));
-        List<Class<? extends Entity>> result = new ArrayList<>();
-        for (String entityName : entityNames) {
-            final Class<? extends Entity> entityClass = resolveEntityClass(entityName);
-            result.add(entityClass);
-        }
-        return result;
     }
 
     @SubscribeEvent
