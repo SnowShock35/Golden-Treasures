@@ -1,45 +1,39 @@
-package net.snowshock.goldentreasures.items;
+package net.snowshock.goldentreasures.items.block;
 
 import com.google.common.collect.ImmutableMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.snowshock.goldentreasures.GoldenTreasures;
-import net.snowshock.goldentreasures.references.ReferencesModInfo;
+import net.minecraft.world.World;
+import net.snowshock.goldentreasures.blocks.BlockGoldenTreasures;
 import net.snowshock.goldentreasures.utils.LanguageHelper;
 import net.snowshock.goldentreasures.utils.NBTHelper;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
-public class ItemGoldenTreasures extends Item {
+public class ItemBlockGoldenTreasures extends ItemBlock {
+    //defaults to only showing the tooltip when shift is pressed. you can override this behavior at the item level by setting the item's showTooltipsAlways bool to true.
     private boolean showTooltipsAlways = false;
 
-    public ItemGoldenTreasures() {
-        super();
-        this.setCreativeTab(GoldenTreasures.CREATIVE_TAB);
+    private final BlockGoldenTreasures block;
+
+    public ItemBlockGoldenTreasures(BlockGoldenTreasures block) {
+        super(block);
+        this.block = block;
     }
 
+    /**
+     * Just a call to formatTooltip(). If you are overriding this function, call
+     * formatTooltip() directly and DO NOT call super.addInformation().
+     */
     @Override
-    public String getUnlocalizedName() {
-        return String.format("item.%s%s", ReferencesModInfo.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    public String getUnlocalizedName(ItemStack itemStack) {
-        return String.format("item.%s%s", ReferencesModInfo.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean whatDoesThisEvenDo) {
+        this.formatTooltip(null, stack, list);
     }
 
     /**
@@ -53,21 +47,11 @@ public class ItemGoldenTreasures extends Item {
      * @param stack    The ItemStack passed from addInformation.
      * @param list     List of description lines passed from addInformation.
      */
-    @SideOnly(Side.CLIENT)
     public void formatTooltip(ImmutableMap<String, String> toFormat, ItemStack stack, List list) {
         if (showTooltipsAlways() || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
             LanguageHelper.formatTooltip(this.getUnlocalizedNameInefficiently(stack) + ".tooltip", toFormat, stack, list);
     }
 
-    /**
-     * Just a call to formatTooltip(). If you are overriding this function, call
-     * formatTooltip() directly and DO NOT call super.addInformation().
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean whatDoesThisEvenDo) {
-        this.formatTooltip(null, stack, list);
-    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -84,4 +68,8 @@ public class ItemGoldenTreasures extends Item {
     }
 
 
+    @Override
+    public void onUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
+        block.doHeldItemUpdate(ist, world, entity, i, f);
+    }
 }

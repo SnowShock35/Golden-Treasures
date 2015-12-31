@@ -45,6 +45,8 @@ public class GoldenTreasures {
 
         metadata = MetadataHelper.transformMetadata(metadata);
 
+        proxy.preInit();
+
         InitModItems.init();
         LOGGER.log(Level.INFO, "Mod Items Initialized");
         InitModBlocks.init();

@@ -8,4 +8,9 @@ public class CommonProxy {
     public void init() {
         FMLCommonHandler.instance().bus().register(new BlockGoldenTorch(ReferencesConfigInfo.GoldenTorch.interdictionField));
     }
+
+    public void preInit()
+    {
+
+    }
 }

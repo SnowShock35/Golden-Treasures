@@ -26,7 +26,7 @@ import net.snowshock.goldentreasures.utils.ContentHelper;
 import java.util.List;
 import java.util.Random;
 
-import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
 
 public class BlockGoldenLilypad extends BlockFlower {
     public BlockGoldenLilypad() {

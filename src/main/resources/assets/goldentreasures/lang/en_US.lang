@@ -8,15 +8,27 @@ itemGroup.GoldenTreasures=Golden Treasures
 
 # - Item Localization
 item.GoldenTreasures:golden_bomb.name=Golden Bomb
+item.GoldenTreasures:golden_bomb.tooltip=A powerful explosive that doesn't;break blocks or hurt the wielder.
 item.GoldenTreasures:golden_chalice.name=Golden Chalice
+item.GoldenTreasures:golden_chalice.tooltip=An infinite water bucket.;Enable to drain water.;Disable to place water.;Drinking restores hunger;in exchange for life.
 item.GoldenTreasures:golden_coin.name=Golden Coin
+item.GoldenTreasures:golden_coin.tooltip=Draws in items and XP.;Shift+Right to activate.;Hold Right click to super-vacuum.
 item.GoldenTreasures:golden_food.name=Golden Food
-item.GoldenTreasures:golden_lantern.name=Golden Lantern
-item.GoldenTreasures:golden_lilypad.name=Golden Lily Pad
+item.GoldenTreasures:golden_food.tooltip=Completely restores hunger.
+item.GoldenTreasures:golden_lantern.name={{!colors.yellow}}Golden Lantern
+item.GoldenTreasures:golden_lantern.tooltip=Places torches in unlit;areas automatically.;Shift + Right-Click to activate.
 item.GoldenTreasures:golden_miner.name=Golden Miner
+item.GoldenTreasures:golden_miner.tooltip=Heeere's Johnny!;Consumes gunpowder to destroy blocks.;{{!colors.yellow}}Charge: {{charge}}
 item.GoldenTreasures:golden_staff.name=Golden Staff
-item.GoldenTreasures:golden_torch.name=Golden Torch
+item.GoldenTreasures:golden_staff.tooltip=Consumes torches, can place them;long distances, but costs extra.;{{!colors.yellow}}Contents: {{phrase}};{{!colors.rose}}Placing: {{!colors.yellow}}{{placing}}
 
 # - Block Localization
 tile.GoldenTreasures:tile.golden_lilypad.name=Golden Lily Pad
-tile.GoldenTreasures:tile.golden_torch.name=Golden Torch
+tile.GoldenTreasures:tile.golden_torch.name={{!colors.yellow}}Golden Torch
+tile.GoldenTreasures:tile.golden_torch.tooltip=Repels creatures and projectiles;Works when held or placed.
+
+# Golden Staff
+tooltip.absorb={{!colors.light_purple}}Shift + Right click to toggle auto-absorb.
+tooltip.absorb_active={{!colors.purple}}Automagically absorbs {{item}}{{!colors.purple}}.
+
+#

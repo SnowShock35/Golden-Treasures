@@ -21,7 +21,7 @@ import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
 import java.util.Random;
 
-import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
 
 public class BlockGoldenTorch extends BlockTorch {
 

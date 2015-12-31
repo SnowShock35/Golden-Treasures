@@ -5,12 +5,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
-import static net.snowshock.goldentreasures.utils.LocalizedNameHelper.getUnwrappedUnlocalizedName;
+import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
 
 public class BlockGoldenTreasures extends Block {
+
+    //defaults to only showing the tooltip when shift is pressed. you can override this behavior at the item level by setting the item's showTooltipsAlways bool to true.
+    private boolean showTooltipsAlways = false;
+
     public BlockGoldenTreasures(Material material) {
         super(material);
         this.setCreativeTab(GoldenTreasures.CREATIVE_TAB);
@@ -27,5 +34,7 @@ public class BlockGoldenTreasures extends Block {
         blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
-
+    public void doHeldItemUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
+        // Do nothing by default.
+    }
 }
