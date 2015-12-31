@@ -14,7 +14,11 @@ import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModBlocks {
+
+    @GameRegistry.ObjectHolder(ReferencesModBlocks.GOLDEN_LILYPAD)
     public static final BlockFlower blockGoldenLilypad = null;
+
+    @GameRegistry.ObjectHolder(ReferencesModBlocks.GOLDEN_TORCH)
     public static final BlockTorch blockGoldenTorch = null;
 
     public static void init() {
