@@ -3,11 +3,10 @@ package net.snowshock.goldentreasures;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
+import net.snowshock.goldentreasures.items.ItemGoldenMiner;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
-import net.snowshock.goldentreasures.utils.ContentHelper;
 import net.snowshock.goldentreasures.utils.EntityHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,10 +36,33 @@ public class ConfigHandler {
         loadGoldenCoinSettings();
         loadGoldenLanternSettings();
         loadGoldenStaffSettings();
+        loadGoldenMinerSettings();
 
         if (configuration.hasChanged()) {
             configuration.save();
         }
+    }
+
+    private static void loadGoldenMinerSettings() {
+        final String category = ConfigCategories.GOLDEN_MINER;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_MINER_COMMENT);
+
+        GoldenMiner.BLOCKS = Arrays.asList(configuration.getStringList("blocks", category,
+                ItemGoldenMiner.defaultBlocks.toArray(new String[]{}),
+                "List of blocks which the golden miner is allowed to mine."));
+        GoldenMiner.CENTERED_EXPLOSION = configuration.getBoolean("centered_explosion", category, false,
+                "Centre the explosion at target block?(otherwise explosion will have starting edge at target block)");
+        GoldenMiner.PERFECT_CUBE = configuration.getBoolean("perfect_cube", category, true,
+                "Should the explosion be shaped like a perfect cube? (Otherwise it will be a sphere)");
+        GoldenMiner.EXPLOSION_RADIUS = configuration.getInt("explosion_radius", category, 1, 1, 5,
+                "Radius of the explosion");
+        GoldenMiner.COST = configuration.getInt("cost", category, 3, 0, 9999,
+                "How many charges will each explosion consume.");
+        GoldenMiner.GUNPOWDER_WORTH = configuration.getInt("gunpowder_worth", category, 1, 0, 9999,
+                "How many charges is one gunpowder worth.");
+        GoldenMiner.GUNPOWDER_LIMIT = configuration.getInt("gunpowder_limit", category, 250, 0, 9999,
+                "How many gunpowder may be stored in internal storage.");
     }
 
     private static void loadGoldenStaffSettings() {

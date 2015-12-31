@@ -3,6 +3,7 @@ package net.snowshock.goldentreasures.references;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.item.Item;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
+import net.snowshock.goldentreasures.items.ItemGoldenMiner;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class ReferencesConfigInfo {
         public static final String GOLDEN_LANTERN_COMMENT = "Configuration options for the golden lantern.";
         public static final String GOLDEN_STAFF ="GoldenStaff";
         public static final String GOLDEN_STAFF_COMMENT = "Configuration options for the golden staff.";
+        public static final String GOLDEN_MINER ="GoldenMiner";
+        public static final String GOLDEN_MINER_COMMENT = "Configuration options for the golden miner.";
     }
 
     public static final class GeneralConfigs {
@@ -26,6 +29,13 @@ public class ReferencesConfigInfo {
 
     public static final class GoldenMiner {
         public static int HUD_POSITION = 3;
+        public static List<String> BLOCKS = ItemGoldenMiner.defaultBlocks;
+        public static boolean CENTERED_EXPLOSION = false;
+        public static int EXPLOSION_RADIUS = 1;
+        public static boolean PERFECT_CUBE = true;
+        public static int COST = 3;
+        public static int GUNPOWDER_WORTH = 1;
+        public static int GUNPOWDER_LIMIT = 250;
     }
 
     public static final class GoldenStaff {
