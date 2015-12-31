@@ -122,7 +122,7 @@ public class ItemGoldenLantern extends ItemGoldenTreasuresTogglable {
 //        return world.rayTraceBlocks(playerVector, rayTraceVector, weirdBucketBoolean);
 //    }
 //
-    private boolean findAndDrainSojournersStaff(EntityPlayer player) {
+    private boolean findAndDrainGoldenStaff(EntityPlayer player) {
         ItemGoldenStaff staffItem = (ItemGoldenStaff) InitModItems.golden_staff;
         if (player.capabilities.isCreativeMode)
             return true;
@@ -202,7 +202,7 @@ public class ItemGoldenLantern extends ItemGoldenTreasuresTogglable {
             for (int side : trySides) {
                 if (!world.canPlaceEntityOnSide(Blocks.torch, x, y, z, false, side, player, ist))
                     continue;
-                if (!(InventoryHelper.consumeItem(Blocks.torch, player, 0, 1) || findAndDrainSojournersStaff(player)))
+                if (!(InventoryHelper.consumeItem(Blocks.torch, player, 0, 1) || findAndDrainGoldenStaff(player)))
                     continue;
                 if (placeBlockAt(ist, player, world, x, y, z, side, xOff, yOff, zOff, attemptSide(world, x, y, z, side))) {
                     Blocks.torch.onBlockAdded(world, x, y, z);

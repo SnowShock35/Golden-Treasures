@@ -294,7 +294,7 @@ public class ItemGoldenStaff extends ItemGoldenTreasuresTogglable {
     public void addInformation(ItemStack ist, EntityPlayer player, List list, boolean par4) {
         if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && !Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
             return;
-        //maps the contents of the Sojourner's staff to a tooltip, so the player can review the torches stored within.
+        //maps the contents of the Golden staff to a tooltip, so the player can review the torches stored within.
         String phrase = "Nothing.";
         String placing = "Nothing.";
         NBTTagCompound tagCompound = NBTHelper.getTag(ist);
