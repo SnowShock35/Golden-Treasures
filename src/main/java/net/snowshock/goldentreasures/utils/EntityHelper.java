@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class EntityHelper {
     public static final String THAUMCRAFT_GOLEM_BASE_CLASS_NAME = "thaumcraft.common.entities.golems.EntityGolemBase";
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".EntityHelper");
 
     private static Class golemBaseClass = null;
     private static boolean thaumcraftNotInstalled = false;
@@ -59,13 +59,13 @@ public class EntityHelper {
      */
     public static String resolveEntityName(Class<? extends Entity> clazz) {
         Map<Class, String> mapping = EntityList.classToStringMapping;
-        LOGGER.debug("Converting entity class [{}] to name", clazz);
+        LOGGER.trace("Converting entity class [{}] to name", clazz);
         final String result = mapping.get(clazz);
 
         if (result == null)
             LOGGER.warn("Tried to resolve entity result from class [{}] but found nothing", clazz.getName());
         else
-            LOGGER.trace("Entity [{}] -> [{}]", clazz.getName(), result);
+            LOGGER.debug("Entity [{}] -> [{}]", clazz.getName(), result);
         return result;
     }
 
@@ -115,12 +115,12 @@ public class EntityHelper {
 
         final Class baseClass;
 
-        LOGGER.debug("Testing whether [{}] is a thaumcraft golem", entity);
+        LOGGER.trace("Testing whether [{}] is a thaumcraft golem", entity);
         baseClass = getGolemBaseClass();
 
         final boolean isGolem = isEntityOfType(entity, baseClass);
 
-        LOGGER.trace("[{}] isGolem = [{}]", entity, isGolem);
+        LOGGER.debug("[{}] isGolem = [{}]", entity, isGolem);
         return isGolem;
     }
 
