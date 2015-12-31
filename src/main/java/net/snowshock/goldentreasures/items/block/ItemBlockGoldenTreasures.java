@@ -34,10 +34,6 @@ public class ItemBlockGoldenTreasures extends ItemBlock {
         this.formatTooltip(null, stack, list);
     }
 
-    protected String unwrapUnlocalizedName(String unlocalizedName) {
-        return LanguageHelper.unwrapUnlocalizedName(unlocalizedName);
-    }
-
     /**
      * Used to format tooltips. Grabs tooltip from language registry with the
      * entry 'item.unlocalizedName.tooltip'. Has support for Handlebars-style
