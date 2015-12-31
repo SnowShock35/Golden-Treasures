@@ -9,20 +9,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.snowshock.goldentreasures.blocks.BlockGoldenTreasures;
+import net.snowshock.goldentreasures.items.IHeldBlockAction;
 import net.snowshock.goldentreasures.utils.LanguageHelper;
-import net.snowshock.goldentreasures.utils.NBTHelper;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
 public class ItemBlockGoldenTreasures extends ItemBlock {
+    private final Block block;
     //defaults to only showing the tooltip when shift is pressed. you can override this behavior at the item level by setting the item's showTooltipsAlways bool to true.
     private boolean showTooltipsAlways = false;
 
-    private final BlockGoldenTreasures block;
-
-    public ItemBlockGoldenTreasures(BlockGoldenTreasures block) {
+    public ItemBlockGoldenTreasures(Block block) {
         super(block);
         this.block = block;
     }
@@ -70,6 +68,8 @@ public class ItemBlockGoldenTreasures extends ItemBlock {
 
     @Override
     public void onUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
-        block.doHeldItemUpdate(ist, world, entity, i, f);
+        if (block instanceof IHeldBlockAction) {
+            ((IHeldBlockAction) block).doHeldItemUpdate(ist, world, entity, i, f);
+        }
     }
 }

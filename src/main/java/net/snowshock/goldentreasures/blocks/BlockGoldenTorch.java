@@ -1,21 +1,17 @@
 package net.snowshock.goldentreasures.blocks;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.snowshock.goldentreasures.GoldenTreasures;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
+import net.snowshock.goldentreasures.items.IHeldBlockAction;
 import net.snowshock.goldentreasures.references.ReferencesModBlocks;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
@@ -23,7 +19,7 @@ import java.util.Random;
 
 import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
 
-public class BlockGoldenTorch extends BlockTorch {
+public class BlockGoldenTorch extends BlockTorch implements IHeldBlockAction {
 
     private final InterdictionField interdictionField;
 
@@ -101,39 +97,36 @@ public class BlockGoldenTorch extends BlockTorch {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
-    public void playerTick(TickEvent.PlayerTickEvent event) {
-        final EntityPlayer player = event.player;
-        final World world = player.worldObj;
-        final TickEvent.Phase phase = event.phase;
-        final ItemStack equippedItem = player.getCurrentEquippedItem();
+    @Override
+    public void doHeldItemUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
+        if (world.isRemote)
+            return;
 
-        if (phase == TickEvent.Phase.START && event.side == Side.SERVER && isStackOfMe(equippedItem)) {
-            int blockX = MathHelper.floor_double(event.player.posX);
-            int blockY = MathHelper.floor_double(event.player.posY - event.player.getYOffset());
-            int blockZ = MathHelper.floor_double(event.player.posZ);
+        EntityPlayer player = getEntityPlayer(entity);
+        if (player == null)
+            return;
 
-            interdictionField.doInterdictionTick(world, blockX, blockY, blockZ);
-        }
-    }
+        int blockX = MathHelper.floor_double(player.posX);
+        int blockY = MathHelper.floor_double(player.posY - player.getYOffset());
+        int blockZ = MathHelper.floor_double(player.posZ);
 
-    private boolean isStackOfMe(ItemStack equippedItem) {
-        if (equippedItem != null) {
-            final Item item = equippedItem.getItem();
-            final Block block = getBlockFrom(item);
-            return block != null && block.getClass().equals(BlockGoldenTorch.class);
-        } else
-            return false;
-    }
-
-    private Block getBlockFrom(Item item) {
-        if (item != null && item instanceof ItemBlock)
-            return ((ItemBlock) item).field_150939_a;
-        else
-            return null;
+        interdictionField.doInterdictionTick(world, blockX, blockY, blockZ);
     }
 
     private boolean isClientSide(World world) {
         return world.isRemote;
+    }
+
+    /**
+     * Converts entity to entityplayer. Will return
+     *
+     * @return {@code null} if the entity is not an instance of EntityPlayer. Otherwise returns {@code entity}
+     */
+    private EntityPlayer getEntityPlayer(Entity entity) {
+        EntityPlayer player = null;
+        if (entity instanceof EntityPlayer) {
+            player = (EntityPlayer) entity;
+        }
+        return player;
     }
 }

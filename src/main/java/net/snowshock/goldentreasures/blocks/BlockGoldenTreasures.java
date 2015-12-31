@@ -9,11 +9,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.snowshock.goldentreasures.GoldenTreasures;
+import net.snowshock.goldentreasures.items.IHeldBlockAction;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 
 import static net.snowshock.goldentreasures.utils.LanguageHelper.getUnwrappedUnlocalizedName;
 
-public class BlockGoldenTreasures extends Block {
+public class BlockGoldenTreasures extends Block implements IHeldBlockAction {
 
     //defaults to only showing the tooltip when shift is pressed. you can override this behavior at the item level by setting the item's showTooltipsAlways bool to true.
     private boolean showTooltipsAlways = false;
