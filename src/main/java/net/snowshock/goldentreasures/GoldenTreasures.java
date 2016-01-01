@@ -9,8 +9,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.snowshock.goldentreasures.init.InitModBlocks;
-import net.snowshock.goldentreasures.init.InitModItems;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.utils.MetadataHelper;
 import org.apache.logging.log4j.Level;
@@ -32,25 +30,20 @@ public class GoldenTreasures {
     public static CommonProxy proxy;
 
     public static CreativeTabs CREATIVE_TAB = new CreativeTabGoldenTreasures(CreativeTabs.getNextID(), ReferencesModInfo.MOD_ID);
-    public static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.log(Level.INFO, "Pre Initialization: Starting...");
 
         File configFile = event.getSuggestedConfigurationFile();
-        ConfigHandler.init(configFile);
+        ConfigHandler.preInit(configFile);
 
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
 
         metadata = MetadataHelper.transformMetadata(metadata);
 
         proxy.preInit();
-
-        InitModItems.init();
-        LOGGER.log(Level.INFO, "Mod Items Initialized");
-        InitModBlocks.init();
-        LOGGER.log(Level.INFO, "Mod Blocks Initialized");
 
         LOGGER.log(Level.INFO, "Pre Initialization: Complete");
     }

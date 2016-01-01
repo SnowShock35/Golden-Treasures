@@ -21,7 +21,7 @@ import static net.snowshock.goldentreasures.utils.EntityHelper.resolveEntityClas
 public class ConfigHandler {
     public static Configuration configuration;
 
-    public static void init(File configFile) {
+    public static void preInit(File configFile) {
         if (configuration == null) {
             configuration = new Configuration(configFile);
             loadConfiguration();

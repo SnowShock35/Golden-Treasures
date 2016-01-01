@@ -5,9 +5,15 @@ import net.minecraft.item.ItemFood;
 import net.snowshock.goldentreasures.items.*;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModItems {
+
+    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+
     public static final ItemGoldenTreasures golden_bomb = null;
     public static final ItemGoldenTreasures golden_coin = null;
     public static final ItemGoldenTreasures golden_miner = null;
@@ -16,7 +22,9 @@ public class InitModItems {
     public static final ItemGoldenTreasures golden_staff = null;
     public static final ItemFood golden_food = null;
 
-    public static void init() {
+    public static void preInit() {
+        LOGGER.debug("Initializing Items....");
+
         GameRegistry.registerItem(new ItemGoldenBomb(), ReferencesModItems.GOLDEN_BOMB);
         GameRegistry.registerItem(new ItemGoldenCoin(), ReferencesModItems.GOLDEN_COIN);
         GameRegistry.registerItem(new ItemGoldenMiner(), ReferencesModItems.GOLDEN_MINER);
@@ -24,6 +32,8 @@ public class InitModItems {
         GameRegistry.registerItem(new ItemGoldenLantern(), ReferencesModItems.GOLDEN_LANTERN);
         GameRegistry.registerItem(new ItemGoldenFood(), ReferencesModItems.GOLDEN_FOOD);
         GameRegistry.registerItem(new ItemGoldenStaff(), ReferencesModItems.GOLDEN_STAFF);
+
+        LOGGER.log(Level.INFO, "Mod Items Initialized");
     }
 }
 

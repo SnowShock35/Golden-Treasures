@@ -13,9 +13,14 @@ import net.snowshock.goldentreasures.items.block.ItemBlockGoldenTreasures;
 import net.snowshock.goldentreasures.references.ReferencesConfigInfo;
 import net.snowshock.goldentreasures.references.ReferencesModBlocks;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModBlocks {
+
+    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
     @GameRegistry.ObjectHolder(ReferencesModBlocks.GOLDEN_LILYPAD)
     public static final BlockGoldenTreasures blockGoldenLilypad = null;
@@ -23,11 +28,15 @@ public class InitModBlocks {
     @GameRegistry.ObjectHolder(ReferencesModBlocks.GOLDEN_TORCH)
     public static final BlockTorch blockGoldenTorch = null;
 
-    public static void init() {
+    public static void preInit() {
+        LOGGER.debug("Initializing Blocks....");
+
         InterdictionField goldenTorchInterdictionField = ReferencesConfigInfo.GoldenTorch.interdictionField;
         BlockGoldenTorch goldenTorch = new BlockGoldenTorch(goldenTorchInterdictionField);
 
         GameRegistry.registerBlock(new BlockGoldenLilypad(), ItemBlockGoldenLilypad.class, ReferencesModBlocks.GOLDEN_LILYPAD);
         GameRegistry.registerBlock(goldenTorch, ItemBlockGoldenTreasures.class, ReferencesModBlocks.GOLDEN_TORCH);
+
+        LOGGER.log(Level.INFO, "Mod Blocks Initialized");
     }
 }
