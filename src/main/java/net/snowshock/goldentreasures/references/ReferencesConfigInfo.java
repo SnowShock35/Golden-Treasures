@@ -24,9 +24,15 @@ public class ReferencesConfigInfo {
         public static final String GOLDEN_MINER_COMMENT = "Configuration options for the golden miner.";
         public static final String GOLDEN_LILYPAD ="GoldenLilypad";
         public static final String GOLDEN_LILYPAD_COMMENT = "Configuration options for the golden lilypad.";
+        public static final String GOLDEN_CHALICE ="GoldenChalice";
+        public static final String GOLDEN_CHALICE_COMMENT = "Configuration options for the golden chalice.";
     }
 
     public static final class GeneralConfigs {
+    }
+
+    public static final class GoldenChalice {
+        public static int HUNGER_SATURATION_MULTIPLIER = 4;
     }
 
     public static final class GoldenLilypad {

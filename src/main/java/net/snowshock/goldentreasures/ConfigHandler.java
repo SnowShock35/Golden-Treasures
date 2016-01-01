@@ -36,10 +36,20 @@ public class ConfigHandler {
         loadGoldenStaffSettings();
         loadGoldenMinerSettings();
         loadGoldenLilypadSettings();
+        loadGoldenChaliceSettings();
 
         if (configuration.hasChanged()) {
             configuration.save();
         }
+    }
+
+    private static void loadGoldenChaliceSettings() {
+        final String category = ConfigCategories.GOLDEN_CHALICE;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_CHALICE_COMMENT);
+
+        GoldenChalice.HUNGER_SATURATION_MULTIPLIER = configuration.getInt("hunger_satiation_multiplier", category, 4, 0, 9999,
+                "Multiplies the amount of saturation restored (and drowning damage taken) when drinking from the chalice.");
     }
 
     private static void loadGoldenLilypadSettings() {

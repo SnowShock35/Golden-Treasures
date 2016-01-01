@@ -58,7 +58,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasuresTogglable {
         if (enabled && renderPass == 1)
             return iconOverlay;
         else
-            return this.itemIcon;
+            return super.getIcon(ist, renderPass);
     }
 
     @Override
