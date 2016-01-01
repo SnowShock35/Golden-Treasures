@@ -2,20 +2,16 @@ package net.snowshock.goldentreasures;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.entity.Entity;
 import net.minecraftforge.common.config.Configuration;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
 import net.snowshock.goldentreasures.items.ItemGoldenMiner;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.utils.EntityHelper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.*;
 
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
-import static net.snowshock.goldentreasures.utils.EntityHelper.resolveEntityClass;
 
 
 public class ConfigHandler {
@@ -37,16 +33,36 @@ public class ConfigHandler {
         loadGoldenMinerSettings();
         loadGoldenLilypadSettings();
         loadGoldenChaliceSettings();
+        loadGoldenBombSettings();
+        loadGoldenFoodSettings();
 
         if (configuration.hasChanged()) {
             configuration.save();
         }
     }
 
+    private static void loadGoldenBombSettings() {
+        final String category = ConfigCategories.GOLDEN_BOMB;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_BOMB_COMMENT);
+
+        GoldenBomb.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+    }
+
+    private static void loadGoldenFoodSettings() {
+        final String category = ConfigCategories.GOLDEN_FOOD;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_FOOD_COMMENT);
+
+        GoldenFood.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+    }
+
     private static void loadGoldenChaliceSettings() {
         final String category = ConfigCategories.GOLDEN_CHALICE;
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_CHALICE_COMMENT);
+
+        GoldenChalice.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
 
         GoldenChalice.HUNGER_SATURATION_MULTIPLIER = configuration.getInt("hunger_satiation_multiplier", category, 4, 0, 9999,
                 "Multiplies the amount of saturation restored (and drowning damage taken) when drinking from the chalice.");
@@ -56,6 +72,8 @@ public class ConfigHandler {
         final String category = ConfigCategories.GOLDEN_LILYPAD;
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_LILYPAD_COMMENT);
+
+        GoldenLilypad.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
 
         GoldenLilypad.SECONDS_BETWEEN_GROWTH_TICKS = configuration.getInt("seconds_between_growth_ticks", category, 47, 1, 9999,
                 "Interval between growth ticks in seconds.");
@@ -69,6 +87,8 @@ public class ConfigHandler {
         final String category = ConfigCategories.GOLDEN_MINER;
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_MINER_COMMENT);
+
+        GoldenMiner.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
 
         GoldenMiner.BLOCKS = Arrays.asList(configuration.getStringList("blocks", category,
                 ItemGoldenMiner.defaultBlocks.toArray(new String[]{}),
@@ -92,6 +112,8 @@ public class ConfigHandler {
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_STAFF_COMMENT);
 
+        GoldenStaff.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+
         GoldenStaff.MAX_RANGE = configuration.getInt("max_range", category, 30, 1, 30,
                 "How far out the golden staff will place torches.");
         GoldenStaff.MAX_CAPACITY_PER_ITEM_TYPE = configuration.getInt("max_capacity_per_item_type",
@@ -110,6 +132,8 @@ public class ConfigHandler {
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_LANTERN_COMMENT);
 
+        GoldenLantern.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+
         GoldenLantern.MIN_LIGHT_LEVEL = configuration.getInt("min_light_level", category, 8, 0, 15,
                 "Minimum light level before a torch is placed.");
         GoldenLantern.PLACEMENT_SCAN_RADIUS = configuration.getInt("placement_scan_radius", category, 6, 1, 15,
@@ -123,6 +147,9 @@ public class ConfigHandler {
         final String category = ConfigCategories.GOLDEN_COIN;
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_COIN_COMMENT);
+
+        GoldenCoin.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+
         GoldenCoin.LONG_PULL_DISTANCE = configuration.getInt("long_pull_distance", category, 15, 0, 64,
                 "Distance the coin will pull items whilst being used (holding right mouse button).");
         GoldenCoin.STANDARD_PULL_DISTANCE = configuration.getInt("standard_pull_distance", category, 5, 0, 64,
@@ -140,6 +167,8 @@ public class ConfigHandler {
         final String category = ConfigCategories.GOLDEN_TORCH;
         configuration.setCategoryRequiresMcRestart(ConfigCategories.GOLDEN_TORCH, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_TORCH_COMMENT);
+
+        GoldenTorch.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
 
         final int pushRadius = configuration.getInt("push_radius", category, 5, 1, 15,
                 "Range of the golden torch's interdiction effect.");

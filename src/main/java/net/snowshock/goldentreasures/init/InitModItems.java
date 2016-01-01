@@ -1,6 +1,7 @@
 package net.snowshock.goldentreasures.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.snowshock.goldentreasures.items.*;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
@@ -8,6 +9,8 @@ import net.snowshock.goldentreasures.references.ReferencesModItems;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModItems {
@@ -25,18 +28,20 @@ public class InitModItems {
     public static void preInit() {
         LOGGER.debug("Initializing Items....");
 
-        GameRegistry.registerItem(new ItemGoldenBomb(), ReferencesModItems.GOLDEN_BOMB);
-        GameRegistry.registerItem(new ItemGoldenCoin(), ReferencesModItems.GOLDEN_COIN);
-        GameRegistry.registerItem(new ItemGoldenMiner(), ReferencesModItems.GOLDEN_MINER);
-        GameRegistry.registerItem(new ItemGoldenChalice(), ReferencesModItems.GOLDEN_CHALICE);
-        GameRegistry.registerItem(new ItemGoldenLantern(), ReferencesModItems.GOLDEN_LANTERN);
-        GameRegistry.registerItem(new ItemGoldenFood(), ReferencesModItems.GOLDEN_FOOD);
-        GameRegistry.registerItem(new ItemGoldenStaff(), ReferencesModItems.GOLDEN_STAFF);
+        registerItemIfEnabled(GoldenBomb.ITEM_ENABLED, new ItemGoldenBomb(), ReferencesModItems.GOLDEN_BOMB);
+        registerItemIfEnabled(GoldenCoin.ITEM_ENABLED, new ItemGoldenCoin(), ReferencesModItems.GOLDEN_COIN);
+        registerItemIfEnabled(GoldenMiner.ITEM_ENABLED, new ItemGoldenMiner(), ReferencesModItems.GOLDEN_MINER);
+        registerItemIfEnabled(GoldenChalice.ITEM_ENABLED, new ItemGoldenChalice(), ReferencesModItems.GOLDEN_CHALICE);
+        registerItemIfEnabled(GoldenLantern.ITEM_ENABLED, new ItemGoldenLantern(), ReferencesModItems.GOLDEN_LANTERN);
+        registerItemIfEnabled(GoldenFood.ITEM_ENABLED, new ItemGoldenFood(), ReferencesModItems.GOLDEN_FOOD);
+        registerItemIfEnabled(GoldenStaff.ITEM_ENABLED, new ItemGoldenStaff(), ReferencesModItems.GOLDEN_STAFF);
 
         LOGGER.log(Level.INFO, "Mod Items Initialized");
     }
-}
 
-// TODO: Reimpliment these
-//    public static final ItemGoldenTreasures golden_lilypad = null;
-//    GameRegistry.registerItem(golden_lilypad, ReferencesModItems.GOLDEN_LILYPAD);
+    private static void registerItemIfEnabled(boolean itemEnabled, Item item, String name) {
+        if (itemEnabled) {
+            GameRegistry.registerItem(item, name);
+        }
+    }
+}

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenBomb;
 import static net.snowshock.goldentreasures.references.ReferencesModEntities.GOLDEN_BOMB_ENTITY;
 
 public class InitModEntities {
@@ -17,8 +18,10 @@ public class InitModEntities {
     public static void init() {
         LOGGER.debug("Initializing Entities....");
 
-        EntityRegistry.registerModEntity(EntityGoldenBomb.class, GOLDEN_BOMB_ENTITY, 0,
-                GoldenTreasures.instance, 128, 5, true);
+        if (GoldenBomb.ITEM_ENABLED) {
+            EntityRegistry.registerModEntity(EntityGoldenBomb.class, GOLDEN_BOMB_ENTITY, 0,
+                    GoldenTreasures.instance, 128, 5, true);
+        }
 
         LOGGER.log(Level.INFO, "Mod Entities Initialized");
     }

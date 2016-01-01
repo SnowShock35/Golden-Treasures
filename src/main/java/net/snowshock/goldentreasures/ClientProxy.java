@@ -7,6 +7,9 @@ import net.snowshock.goldentreasures.client.RenderThrown;
 import net.snowshock.goldentreasures.entity.EntityGoldenBomb;
 import net.snowshock.goldentreasures.utils.LanguageHelper;
 
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GoldenBomb;
+
+
 public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
@@ -23,6 +26,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     protected void registerRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityGoldenBomb.class, new RenderThrown(12));
+        if (GoldenBomb.ITEM_ENABLED)
+            RenderingRegistry.registerEntityRenderingHandler(EntityGoldenBomb.class, new RenderThrown(12));
     }
 }

@@ -26,19 +26,33 @@ public class ReferencesConfigInfo {
         public static final String GOLDEN_LILYPAD_COMMENT = "Configuration options for the golden lilypad.";
         public static final String GOLDEN_CHALICE ="GoldenChalice";
         public static final String GOLDEN_CHALICE_COMMENT = "Configuration options for the golden chalice.";
+        public static final String GOLDEN_FOOD ="GoldenFood";
+        public static final String GOLDEN_FOOD_COMMENT = "Configuration options for the golden food.";
+        public static final String GOLDEN_BOMB ="GoldenBomb";
+        public static final String GOLDEN_BOMB_COMMENT = "Configuration options for the golden bomb.";
     }
 
     public static final class GeneralConfigs {
     }
 
+    public static final class GoldenFood {
+        public static boolean ITEM_ENABLED = true;
+    }
+
+    public static final class GoldenBomb {
+        public static boolean ITEM_ENABLED = true;
+    }
+
     public static final class GoldenChalice {
         public static int HUNGER_SATURATION_MULTIPLIER = 4;
+        public static boolean ITEM_ENABLED = true;
     }
 
     public static final class GoldenLilypad {
         public static int SECONDS_BETWEEN_GROWTH_TICKS = 47;
         public static int TILE_RANGE = 4;
         public static int FULL_POTENCY_RANGE = 1;
+        public static boolean ITEM_ENABLED = true;
     }
 
     public static final class GoldenMiner {
@@ -50,6 +64,7 @@ public class ReferencesConfigInfo {
         public static int COST = 3;
         public static int GUNPOWDER_WORTH = 1;
         public static int GUNPOWDER_LIMIT = 250;
+        public static boolean ITEM_ENABLED = true;
     }
 
     public static final class GoldenStaff {
@@ -58,20 +73,24 @@ public class ReferencesConfigInfo {
         public static int MAX_CAPACITY_PER_ITEM_TYPE = 1500;
         public static List<String> TORCHES = ImmutableList.of();
         public static int HUD_POSITION = 3;
+        public static boolean ITEM_ENABLED = true;
     }
 
     public static final class GoldenLantern {
         public static int PLACEMENT_SCAN_RADIUS = 6;
         public static int MIN_LIGHT_LEVEL = 6;
+        public static boolean ITEM_ENABLED = true;
     }
 
     public static final class GoldenCoin {
         public static int LONG_PULL_DISTANCE = 25;
         public static int STANDARD_PULL_DISTANCE = 5;
         public static boolean AUDIO_DISABLED = false;
+        public static boolean ITEM_ENABLED = true;
     }
 
     public static final class GoldenTorch {
         public static InterdictionField interdictionField;
+        public static boolean ITEM_ENABLED = true;
     }
 }
