@@ -15,6 +15,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.snowshock.goldentreasures.init.InitModItems;
+import net.snowshock.goldentreasures.references.ReferencesConfigInfo;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
 import net.snowshock.goldentreasures.utils.ContentHelper;
 import net.snowshock.goldentreasures.utils.InventoryHelper;
@@ -124,6 +125,12 @@ public class ItemGoldenLantern extends ItemGoldenTreasuresTogglable {
 //
     private boolean findAndDrainGoldenStaff(EntityPlayer player) {
         ItemGoldenStaff staffItem = (ItemGoldenStaff) InitModItems.golden_staff;
+
+        // Shortcut out if the staff doesn't exist or isn't enabled.
+        if(staffItem == null || !ReferencesConfigInfo.GoldenStaff.ITEM_ENABLED) {
+            return false;
+        }
+
         if (player.capabilities.isCreativeMode)
             return true;
         for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++) {
