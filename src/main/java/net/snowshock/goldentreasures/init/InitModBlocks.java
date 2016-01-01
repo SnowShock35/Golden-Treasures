@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModBlocks {
 
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
     @GameRegistry.ObjectHolder(ReferencesModBlocks.GOLDEN_LILYPAD)
     public static final BlockGoldenTreasures blockGoldenLilypad = null;

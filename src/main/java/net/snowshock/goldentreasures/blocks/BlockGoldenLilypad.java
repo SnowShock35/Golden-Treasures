@@ -29,7 +29,7 @@ import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.Gold
 public class BlockGoldenLilypad extends BlockGoldenTreasures {
 
     public static final int SECONDS_PER_TICK = 20;
-    public static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".GoldenLilypad");
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".GoldenLilypad");
 
     public BlockGoldenLilypad() {
         super(Material.plants);

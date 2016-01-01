@@ -16,7 +16,7 @@ import java.util.Map;
 import static net.snowshock.goldentreasures.utils.EntityHelper.resolveEntityName;
 
 public class InterdictionField {
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".InterdictionField");
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".InterdictionField");
     public final int fieldRadius;
 
     final Map<EntityHelper.EntityType, Boolean> entityTypesEnabled;

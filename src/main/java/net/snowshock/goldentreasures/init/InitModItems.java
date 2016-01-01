@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModItems {
 
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
     public static final ItemGoldenTreasures golden_bomb = null;
     public static final ItemGoldenTreasures golden_coin = null;

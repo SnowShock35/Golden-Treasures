@@ -12,7 +12,7 @@ import static net.snowshock.goldentreasures.references.ReferencesModEntities.GOL
 
 public class InitModEntities {
 
-    public static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
     public static void init() {
         LOGGER.debug("Initializing Entities....");

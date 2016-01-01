@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ConcussiveExplosion extends Explosion {
 
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".ConcussiveExplosion");
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".ConcussiveExplosion");
 
     /**
      * whether or not the explosion sets fire to blocks around it

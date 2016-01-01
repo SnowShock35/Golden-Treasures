@@ -13,9 +13,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.Map;
 
 public class EntityHelper {
-    public static final String THAUMCRAFT_GOLEM_BASE_CLASS_NAME = "thaumcraft.common.entities.golems.EntityGolemBase";
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".EntityHelper");
 
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".EntityHelper");
+
+    public static final String THAUMCRAFT_GOLEM_BASE_CLASS_NAME = "thaumcraft.common.entities.golems.EntityGolemBase";
+    
     private static Class golemBaseClass = null;
     private static boolean thaumcraftNotInstalled = false;
 

@@ -30,7 +30,7 @@ public class GoldenTreasures {
     public static CommonProxy proxy;
 
     public static CreativeTabs CREATIVE_TAB = new CreativeTabGoldenTreasures(CreativeTabs.getNextID(), ReferencesModInfo.MOD_ID);
-    private static Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
