@@ -57,7 +57,7 @@ public class ItemGoldenMiner extends ItemGoldenTreasuresTogglable {
     public void addInformation(ItemStack ist, EntityPlayer player, List list, boolean par4) {
         if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && !Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
             return;
-        this.formatTooltip(ImmutableMap.of("charge", Integer.toString(NBTHelper.getInteger("gunpowder", ist))), ist, list);
+        this.formatTooltip(ImmutableMap.of("charge", Integer.toString(getStoredGunpowderLevel(ist))), ist, list);
         if (this.isEnabled(ist))
             LanguageHelper.formatTooltip("tooltip.absorb_active", ImmutableMap.of("item", EnumChatFormatting.GRAY + Items.gunpowder.getItemStackDisplayName(new ItemStack(Items.gunpowder))), ist, list);
         LanguageHelper.formatTooltip("tooltip.absorb", null, ist, list);
@@ -65,10 +65,14 @@ public class ItemGoldenMiner extends ItemGoldenTreasuresTogglable {
 
     @Override
     public boolean onItemUse(ItemStack ist, EntityPlayer player, World world, int x, int y, int z, int side, float xOff, float yOff, float zOff) {
-        if (NBTHelper.getInteger("gunpowder", ist) > getCost() || player.capabilities.isCreativeMode) {
+        if (getStoredGunpowderLevel(ist) > getCost() || player.capabilities.isCreativeMode) {
             doExplosion(world, x, y, z, side, ist);
         }
         return true;
+    }
+
+    private int getStoredGunpowderLevel(ItemStack ist) {
+        return NBTHelper.getInteger("gunpowder", ist);
     }
 
     @Override
@@ -83,9 +87,9 @@ public class ItemGoldenMiner extends ItemGoldenTreasuresTogglable {
             return;
 
         if (this.isEnabled(ist)) {
-            if (NBTHelper.getInteger("gunpowder", ist) + gunpowderWorth() < gunpowderLimit()) {
+            if (getStoredGunpowderLevel(ist) + gunpowderWorth() < gunpowderLimit()) {
                 if (InventoryHelper.consumeItem(new ItemStack(Items.gunpowder), player)) {
-                    NBTHelper.setInteger("gunpowder", ist, NBTHelper.getInteger("gunpowder", ist) + gunpowderWorth());
+                    setStoredGunpowderLevel(ist, getStoredGunpowderLevel(ist) + gunpowderWorth());
                 }
             }
         }
@@ -137,8 +141,18 @@ public class ItemGoldenMiner extends ItemGoldenTreasuresTogglable {
             }
         }
         if (destroyedSomething) {
-            NBTHelper.setInteger("gunpowder", ist, NBTHelper.getInteger("gunpowder", ist) - getCost());
+            int newGunpowderLevel = getStoredGunpowderLevel(ist) - getCost();
+            newGunpowderLevel = clampToZero(newGunpowderLevel);
+            setStoredGunpowderLevel(ist, newGunpowderLevel);
         }
+    }
+
+    private int clampToZero(int newGunpowderLevel) {
+        return newGunpowderLevel >=0 ? newGunpowderLevel : 0;
+    }
+
+    private void setStoredGunpowderLevel(ItemStack ist, int i) {
+        NBTHelper.setInteger("gunpowder", ist, i);
     }
 
     public boolean isBreakable(String id) {
