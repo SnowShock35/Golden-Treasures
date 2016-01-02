@@ -17,24 +17,24 @@ public class InitModItems {
 
     private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID);
 
+    public static final ItemFood golden_food = null;
     public static final ItemGoldenTreasures golden_bomb = null;
     public static final ItemGoldenTreasures golden_coin = null;
+    public static final ItemGoldenTreasures golden_staff = null;
     public static final ItemGoldenTreasures golden_miner = null;
     public static final ItemGoldenTreasures golden_chalice = null;
     public static final ItemGoldenTreasures golden_lantern = null;
-    public static final ItemGoldenTreasures golden_staff = null;
-    public static final ItemFood golden_food = null;
 
     public static void preInit() {
         LOGGER.debug("Initializing Items....");
 
         registerItemIfEnabled(GoldenBomb.ITEM_ENABLED, new ItemGoldenBomb(), ReferencesModItems.GOLDEN_BOMB);
         registerItemIfEnabled(GoldenCoin.ITEM_ENABLED, new ItemGoldenCoin(), ReferencesModItems.GOLDEN_COIN);
+        registerItemIfEnabled(GoldenFood.ITEM_ENABLED, new ItemGoldenFood(), ReferencesModItems.GOLDEN_FOOD);
+        registerItemIfEnabled(GoldenStaff.ITEM_ENABLED, new ItemGoldenStaff(), ReferencesModItems.GOLDEN_STAFF);
         registerItemIfEnabled(GoldenMiner.ITEM_ENABLED, new ItemGoldenMiner(), ReferencesModItems.GOLDEN_MINER);
         registerItemIfEnabled(GoldenChalice.ITEM_ENABLED, new ItemGoldenChalice(), ReferencesModItems.GOLDEN_CHALICE);
         registerItemIfEnabled(GoldenLantern.ITEM_ENABLED, new ItemGoldenLantern(), ReferencesModItems.GOLDEN_LANTERN);
-        registerItemIfEnabled(GoldenFood.ITEM_ENABLED, new ItemGoldenFood(), ReferencesModItems.GOLDEN_FOOD);
-        registerItemIfEnabled(GoldenStaff.ITEM_ENABLED, new ItemGoldenStaff(), ReferencesModItems.GOLDEN_STAFF);
 
         LOGGER.log(Level.INFO, "Mod Items Initialized");
     }
