@@ -41,6 +41,7 @@ public class ReferencesConfigInfo {
 
     public static final class GoldenBomb {
         public static boolean ITEM_ENABLED = true;
+        public static boolean DISPENSER_ENABLED = true;
     }
 
     public static final class GoldenChalice {

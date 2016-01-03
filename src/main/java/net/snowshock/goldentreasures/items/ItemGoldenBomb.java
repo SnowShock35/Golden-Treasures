@@ -2,6 +2,10 @@ package net.snowshock.goldentreasures.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.dispenser.BehaviorProjectileDispense;
+import net.minecraft.dispenser.IBehaviorDispenseItem;
+import net.minecraft.dispenser.IPosition;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -42,5 +46,21 @@ public class ItemGoldenBomb extends ItemGoldenTreasures {
         par2World.spawnEntityInWorld(new EntityGoldenBomb(par2World, par3EntityPlayer));
 
         return par1ItemStack;
+    }
+
+    private final IBehaviorDispenseItem dispenserBehaviour = new DispenserBehaviour();
+    public IBehaviorDispenseItem getDispenserBehaviour()
+    {
+        return dispenserBehaviour;
+    }
+
+    protected class DispenserBehaviour extends BehaviorProjectileDispense {
+
+        @Override
+        protected IProjectile getProjectileEntity(World world, IPosition position) {
+            final EntityGoldenBomb entityGoldenBomb = new EntityGoldenBomb(world);
+            entityGoldenBomb.setPosition(position.getX(), position.getY(), position.getZ());
+            return entityGoldenBomb;
+        }
     }
 }

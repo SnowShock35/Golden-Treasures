@@ -1,6 +1,8 @@
 package net.snowshock.goldentreasures.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.BlockDispenser;
+import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.snowshock.goldentreasures.items.*;
@@ -28,7 +30,10 @@ public class InitModItems {
     public static void preInit() {
         LOGGER.debug("Initializing Items....");
 
-        registerItemIfEnabled(GoldenBomb.ITEM_ENABLED, new ItemGoldenBomb(), ReferencesModItems.GOLDEN_BOMB);
+        final ItemGoldenBomb bomb = new ItemGoldenBomb();
+        registerItemIfEnabled(GoldenBomb.ITEM_ENABLED, bomb, ReferencesModItems.GOLDEN_BOMB);
+        if (GoldenBomb.ITEM_ENABLED && GoldenBomb.DISPENSER_ENABLED)
+            BlockDispenser.dispenseBehaviorRegistry.putObject(bomb, bomb.getDispenserBehaviour());
         registerItemIfEnabled(GoldenCoin.ITEM_ENABLED, new ItemGoldenCoin(), ReferencesModItems.GOLDEN_COIN);
         registerItemIfEnabled(GoldenFood.ITEM_ENABLED, new ItemGoldenFood(), ReferencesModItems.GOLDEN_FOOD);
         registerItemIfEnabled(GoldenStaff.ITEM_ENABLED, new ItemGoldenStaff(), ReferencesModItems.GOLDEN_STAFF);

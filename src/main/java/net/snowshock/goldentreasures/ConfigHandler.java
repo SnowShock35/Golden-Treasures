@@ -47,6 +47,8 @@ public class ConfigHandler {
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_BOMB_COMMENT);
 
         GoldenBomb.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+        GoldenBomb.DISPENSER_ENABLED = configuration.getBoolean("dispenser", category, true,
+                "true = bomb shoots from dispenser as if thrown. false = bomb dropped from dispensers as item.");
     }
 
     private static void loadGoldenFoodSettings() {
