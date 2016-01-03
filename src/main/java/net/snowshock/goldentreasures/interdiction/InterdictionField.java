@@ -88,8 +88,6 @@ public class InterdictionField {
 
     /**
      * Decides whether or not {@code entity} may be pushed by the torch.
-     * <p/>
-     * TODO Currently says that anything may be pushed. Will update to read a config later.
      *
      * @param entity Entity being tested for pushability
      * @return true if the entity is allowed to be pushed
