@@ -26,6 +26,7 @@ public class InitModItems {
     public static final ItemGoldenTreasures golden_miner = null;
     public static final ItemGoldenTreasures golden_chalice = null;
     public static final ItemGoldenTreasures golden_lantern = null;
+    public static final ItemGoldenTreasures golden_feather = null;
 
     public static void preInit() {
         LOGGER.debug("Initializing Items....");
@@ -40,6 +41,7 @@ public class InitModItems {
         registerItemIfEnabled(GoldenMiner.ITEM_ENABLED, new ItemGoldenMiner(), ReferencesModItems.GOLDEN_MINER);
         registerItemIfEnabled(GoldenChalice.ITEM_ENABLED, new ItemGoldenChalice(), ReferencesModItems.GOLDEN_CHALICE);
         registerItemIfEnabled(GoldenLantern.ITEM_ENABLED, new ItemGoldenLantern(), ReferencesModItems.GOLDEN_LANTERN);
+        registerItemIfEnabled(GoldenFeather.ITEM_ENABLED, new ItemGoldenFeather(), ReferencesModItems.GOLDEN_FEATHER);
 
         LOGGER.log(Level.INFO, "Mod Items Initialized");
     }

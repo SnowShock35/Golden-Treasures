@@ -30,9 +30,16 @@ public class ReferencesConfigInfo {
         public static final String GOLDEN_FOOD_COMMENT = "Configuration options for the golden food.";
         public static final String GOLDEN_BOMB ="GoldenBomb";
         public static final String GOLDEN_BOMB_COMMENT = "Configuration options for the golden bomb.";
+        public static final String GOLDEN_FEATHER ="GoldenFeather";
+        public static final String GOLDEN_FEATHER_COMMENT = "Configuration options for the Golden Feather.";
     }
 
     public static final class GeneralConfigs {
+    }
+
+    public static final class GoldenFeather {
+        public static boolean ITEM_ENABLED = true;
+        public static int LEAPING_POTENCY = 1;
     }
 
     public static final class GoldenFood {

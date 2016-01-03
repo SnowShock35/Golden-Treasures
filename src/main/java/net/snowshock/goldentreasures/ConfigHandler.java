@@ -35,10 +35,21 @@ public class ConfigHandler {
         loadGoldenChaliceSettings();
         loadGoldenBombSettings();
         loadGoldenFoodSettings();
+        loadGoldenFeatherSettings();
 
         if (configuration.hasChanged()) {
             configuration.save();
         }
+    }
+
+    private static void loadGoldenFeatherSettings() {
+        final String category = ConfigCategories.GOLDEN_FEATHER;
+        configuration.setCategoryRequiresMcRestart(category, true);
+        configuration.setCategoryComment(category, ConfigCategories.GOLDEN_FEATHER_COMMENT);
+
+        GoldenFeather.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+        GoldenFeather.LEAPING_POTENCY = configuration.getInt("leaping_potency", category, 1, 0, 5,
+                "How potent is the leaping effect. 1 = Can just jump a fence (but not 2 block high wall).");
     }
 
     private static void loadGoldenBombSettings() {

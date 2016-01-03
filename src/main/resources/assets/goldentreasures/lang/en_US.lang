@@ -21,6 +21,8 @@ item.GoldenTreasures:golden_miner.name=Golden Miner
 item.GoldenTreasures:golden_miner.tooltip=Heeere's Johnny!;Consumes gunpowder to destroy blocks.;{{!colors.yellow}}Charge: {{charge}}
 item.GoldenTreasures:golden_staff.name=Golden Staff
 item.GoldenTreasures:golden_staff.tooltip=Consumes torches, can place them;long distances, but costs extra.;{{!colors.yellow}}Contents: {{phrase}};{{!colors.rose}}Placing: {{!colors.yellow}}{{placing}}
+item.GoldenTreasures:golden_feather.name=Golden Feather
+item.GoldenTreasures:golden_feather.tooltip=Allows you to leap small buildings in a single bound.
 
 # - Block Localization
 tile.GoldenTreasures:tile.golden_lilypad.name=Golden Lily Pad
