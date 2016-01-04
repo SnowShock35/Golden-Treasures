@@ -40,6 +40,7 @@ public class ReferencesConfigInfo {
     public static final class GoldenFeather {
         public static boolean ITEM_ENABLED = true;
         public static int LEAPING_POTENCY = 1;
+        public static float HUNGER_MULTIPLIER = 3.0F;
     }
 
     public static final class GoldenFood {

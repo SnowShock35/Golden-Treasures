@@ -9,7 +9,10 @@ import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.utils.EntityHelper;
 
 import java.io.File;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
 
@@ -48,8 +51,10 @@ public class ConfigHandler {
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_FEATHER_COMMENT);
 
         GoldenFeather.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
-        GoldenFeather.LEAPING_POTENCY = configuration.getInt("leaping_potency", category, 1, 0, 5,
-                "How potent is the leaping effect. 1 = Can just jump a fence (but not 2 block high wall).");
+        GoldenFeather.LEAPING_POTENCY = configuration.getInt("leaping_potency", category, 3, 0, 5,
+                "How potent is the leaping effect. 1 = Just enough to jump a 2 block high wall).");
+        GoldenFeather.HUNGER_MULTIPLIER = configuration.getFloat("hunger_multiplier", category, 1F, 0F, 9999F,
+                "Multiplier which affects the amount of hunger is consumed when negating fall damage");
     }
 
     private static void loadGoldenBombSettings() {
