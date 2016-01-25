@@ -72,8 +72,8 @@ public class ItemGoldenIngredient extends ItemGoldenTreasures {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(final Item item, final CreativeTabs tab, final List list) {
-        for (int i = 0; i < NUM_INGREDIENTS; i++) {
-            list.add(new ItemStack(item, 1, i));
+        for (int meta = 0; meta < NUM_INGREDIENTS; meta++) {
+            list.add(new ItemStack(item, 1, meta));
         }
     }
 
