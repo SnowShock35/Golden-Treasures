@@ -5,6 +5,9 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.snowshock.goldentreasures.items.*;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.references.ReferencesModItems;
@@ -12,6 +15,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GeneralConfigs.NUM_INGREDIENTS;
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
@@ -52,5 +56,28 @@ public class InitModItems {
         if (itemEnabled) {
             GameRegistry.registerItem(item, name);
         }
+    }
+
+    public static void initDungeonLoot() {
+        addIngredientsToDungeonLoot();
+    }
+
+    private static void addIngredientsToDungeonLoot() {
+        for (int meta = 0; meta < NUM_INGREDIENTS; meta++) {
+            final WeightedRandomChestContent item = new WeightedRandomChestContent(new ItemStack(golden_ingredient, 1, meta), 3, 5, 10);
+            addItemToLootLists(item);
+        }
+    }
+
+    private static void addItemToLootLists(WeightedRandomChestContent item) {
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST).addItem(item);
+        ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(item);
     }
 }

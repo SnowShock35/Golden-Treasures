@@ -8,6 +8,7 @@ public class CommonProxy {
 
     public void init() {
         InitModEntities.init();
+        InitModItems.initDungeonLoot();
     }
 
     public void preInit() {
