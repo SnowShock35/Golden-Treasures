@@ -10,4 +10,5 @@ public class ReferencesModItems {
     public static final String GOLDEN_LANTERN = "golden_lantern";
     public static final String GOLDEN_LILYPAD = "golden_lilypad";
     public static final String GOLDEN_FEATHER = "golden_feather";
+    public static final String GOLDEN_INGREDIENT = "golden_ingredient";
 }

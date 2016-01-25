@@ -35,6 +35,7 @@ public class ReferencesConfigInfo {
     }
 
     public static final class GeneralConfigs {
+        public static int NUM_INGREDIENTS = 3;
     }
 
     public static final class GoldenFeather {

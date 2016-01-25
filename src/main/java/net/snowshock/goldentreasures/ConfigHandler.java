@@ -45,6 +45,16 @@ public class ConfigHandler {
         }
     }
 
+    private static void loadGeneralSettings() {
+        final String category = ConfigCategories.GENERAL;
+        configuration.setCategoryComment(category, ConfigCategories.GENERAL_COMMENT);
+        configuration.setCategoryRequiresMcRestart(category, true);
+
+        GeneralConfigs.NUM_INGREDIENTS = configuration.getInt("num_ingredients", category, 3, 3, 128,
+                "Advanced: Set the number of possible ingredients. Must created the specified number of ingredients in " +
+                        "a resource pack with localised names and icons for this to work. For modpack authors only!");
+    }
+
     private static void loadGoldenFeatherSettings() {
         final String category = ConfigCategories.GOLDEN_FEATHER;
         configuration.setCategoryRequiresMcRestart(category, true);
@@ -176,10 +186,6 @@ public class ConfigHandler {
                 "Disable audio when item is activated?");
     }
 
-    private static void loadGeneralSettings() {
-        configuration.setCategoryComment(ConfigCategories.GENERAL, ConfigCategories.GENERAL_COMMENT);
-        configuration.setCategoryRequiresMcRestart(ConfigCategories.GENERAL, true);
-    }
 
     private static void loadGoldenTorchSettings() {
         final String category = ConfigCategories.GOLDEN_TORCH;

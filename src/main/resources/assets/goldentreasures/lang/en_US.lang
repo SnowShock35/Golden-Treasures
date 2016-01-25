@@ -22,7 +22,15 @@ item.GoldenTreasures:golden_miner.tooltip=Heeere's Johnny!;Consumes gunpowder to
 item.GoldenTreasures:golden_staff.name=Golden Staff
 item.GoldenTreasures:golden_staff.tooltip=Consumes torches, can place them;long distances, but costs extra.;{{!colors.yellow}}Contents: {{phrase}};{{!colors.rose}}Placing: {{!colors.yellow}}{{placing}}
 item.GoldenTreasures:golden_feather.name=Golden Feather
-item.GoldenTreasures:golden_feather.tooltip=Allows you to leap small buildings in a single bound.
+item.GoldenTreasures:golden_feather.tooltip=Allows you to leap small buildings in a single bound.;Negates fall damage at the expense of hunger.
+
+# - Crafting ingredients
+item.GoldenTreasures:golden_ingredient_0.name=Golden Ingredient 1
+item.GoldenTreasures:golden_ingredient_0.tooltip=A crafting ingredient. Will give this a proper name and description later.
+item.GoldenTreasures:golden_ingredient_1.name=Golden Ingredient 2
+item.GoldenTreasures:golden_ingredient_1.tooltip=Another crafting ingredient. Will give this a proper name and description later.
+item.GoldenTreasures:golden_ingredient_2.name=Golden Ingredient 3
+item.GoldenTreasures:golden_ingredient_2.tooltip=Yet another crafting ingredient. Will give this a proper name and description later.
 
 # - Block Localization
 tile.GoldenTreasures:tile.golden_lilypad.name=Golden Lily Pad
