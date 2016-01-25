@@ -66,9 +66,9 @@ public class ItemBlockGoldenTreasures extends ItemBlock {
 
 
     @Override
-    public void onUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
-        if (block instanceof IHeldBlockAction) {
-            ((IHeldBlockAction) block).doHeldItemUpdate(ist, world, entity, i, f);
+    public void onUpdate(ItemStack ist, World world, Entity entity, int i, boolean isHeld) {
+        if (isHeld && block instanceof IHeldBlockAction) {
+            ((IHeldBlockAction) block).doHeldItemUpdate(ist, world, entity, i);
         }
     }
 }

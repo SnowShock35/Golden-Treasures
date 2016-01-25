@@ -44,7 +44,7 @@ public class ItemGoldenFeather extends ItemGoldenTreasures {
 
     // minor jump buff
     @Override
-    public void onUpdate(ItemStack ist, World world, Entity e, int i, boolean f) {
+    public void onUpdate(ItemStack ist, World world, Entity e, int i, boolean isHeld) {
         if (world.isRemote)
             return;
 

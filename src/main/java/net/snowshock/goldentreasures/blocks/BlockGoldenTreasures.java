@@ -38,7 +38,7 @@ public class BlockGoldenTreasures extends Block implements IHeldBlockAction {
         blockIcon = iconRegister.registerIcon(String.format("%s", unwrapUnlocalizedName(this.getUnlocalizedName())));
     }
 
-    public void doHeldItemUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
+    public void doHeldItemUpdate(ItemStack ist, World world, Entity entity, int i) {
         // Do nothing by default.
     }
 }

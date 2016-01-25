@@ -62,7 +62,7 @@ public class ItemGoldenCoin extends ItemGoldenTreasuresTogglable {
     }
 
     @Override
-    public void onUpdate(ItemStack ist, World world, Entity entity, int i, boolean f) {
+    public void onUpdate(ItemStack ist, World world, Entity entity, int i, boolean isHeld) {
         if (world.isRemote)
             return;
         if (!disabledAudio())

@@ -44,7 +44,7 @@ public class ItemGoldenStaff extends ItemGoldenTreasuresTogglable {
     }
 
     @Override
-    public void onUpdate(ItemStack ist, World world, Entity e, int i, boolean b) {
+    public void onUpdate(ItemStack ist, World world, Entity e, int i, boolean isHeld) {
         if (world.isRemote)
             return;
 

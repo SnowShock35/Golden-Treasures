@@ -48,7 +48,7 @@ public class ItemGoldenLantern extends ItemGoldenTreasuresTogglable {
 
     // minor jump buff
     @Override
-    public void onUpdate(ItemStack ist, World world, Entity e, int i, boolean f) {
+    public void onUpdate(ItemStack ist, World world, Entity e, int i, boolean isHeld) {
         if (!isEnabled(ist))
             return;
         if (world.isRemote)
