@@ -68,6 +68,7 @@ public class InitModItems {
         addItemToDungeonLoot(golden_miner, GoldenMiner.CHEST_SPAWN_CHANCE);
         addItemToDungeonLoot(golden_lantern, GoldenLantern.CHEST_SPAWN_CHANCE);
         addItemToDungeonLoot(golden_feather, GoldenFeather.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_chalice, GoldenChalice.CHEST_SPAWN_CHANCE);
     }
 
     private static void addItemToDungeonLoot(Item item, int chestSpawnChance) {
