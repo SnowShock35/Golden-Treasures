@@ -24,13 +24,13 @@ item.GoldenTreasures:golden_staff.tooltip=Consumes torches, can place them;long 
 item.GoldenTreasures:golden_feather.name=Golden Feather
 item.GoldenTreasures:golden_feather.tooltip=Allows you to leap small buildings in a single bound.;Negates fall damage at the expense of hunger.
 
-# - Crafting ingredients
-item.GoldenTreasures:golden_ingredient_0.name=Golden Ingredient 1
-item.GoldenTreasures:golden_ingredient_0.tooltip=A crafting ingredient. Will give this a proper name and description later.
-item.GoldenTreasures:golden_ingredient_1.name=Golden Ingredient 2
-item.GoldenTreasures:golden_ingredient_1.tooltip=Another crafting ingredient. Will give this a proper name and description later.
-item.GoldenTreasures:golden_ingredient_2.name=Golden Ingredient 3
-item.GoldenTreasures:golden_ingredient_2.tooltip=Yet another crafting ingredient. Will give this a proper name and description later.
+# - Crafting components
+item.GoldenTreasures:golden_crafting_component_0.name=Golden Component 1
+item.GoldenTreasures:golden_crafting_component_0.tooltip=A crafting component. Will give this a proper name and description later.
+item.GoldenTreasures:golden_crafting_component_1.name=Golden Component 2
+item.GoldenTreasures:golden_crafting_component_1.tooltip=Another crafting component. Will give this a proper name and description later.
+item.GoldenTreasures:golden_crafting_component_2.name=Golden Component 3
+item.GoldenTreasures:golden_crafting_component_2.tooltip=Yet another crafting component. Will give this a proper name and description later.
 
 # - Block Localization
 tile.GoldenTreasures:tile.golden_lilypad.name=Golden Lily Pad

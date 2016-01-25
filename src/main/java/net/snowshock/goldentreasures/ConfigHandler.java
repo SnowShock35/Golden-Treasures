@@ -51,9 +51,11 @@ public class ConfigHandler {
         configuration.setCategoryComment(category, ConfigCategories.GENERAL_COMMENT);
         configuration.setCategoryRequiresMcRestart(category, true);
 
-        GeneralConfigs.NUM_INGREDIENTS = configuration.getInt("num_ingredients", category, 3, 3, 128,
-                "Advanced: Set the number of possible ingredients. Must created the specified number of ingredients in " +
-                        "a resource pack with localised names and icons for this to work. For modpack authors only!");
+        GeneralConfigs.NUM_CRAFTING_COMPONENTS = configuration.getInt("num_crafting_components", category, 3, 3, 128,
+                "Advanced: Set the number of possible crafting components. To create a custom component that " +
+                        "component's name must be in the locale files (e.g. lang/en_US.lang) and an icon must exist in" +
+                        "textures/items/golden_crafting_component_N.png. This feature is intended for experienced " +
+                        "modpack authors who wish to create custom recipes using something like minetweaker only!");
         GeneralConfigs.DUNGEON_SPAWN_TYPES = Arrays.asList(configuration.getStringList("dungeon_types", category,
                 new String[]{
                         ChestGenHooks.DUNGEON_CHEST,

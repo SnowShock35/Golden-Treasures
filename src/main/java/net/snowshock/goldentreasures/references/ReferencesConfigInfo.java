@@ -36,7 +36,7 @@ public class ReferencesConfigInfo {
     }
 
     public static final class GeneralConfigs {
-        public static int NUM_INGREDIENTS = 3;
+        public static int NUM_CRAFTING_COMPONENTS = 3;
         public static List<String> DUNGEON_SPAWN_TYPES =
                 Arrays.asList(ChestGenHooks.DUNGEON_CHEST,
                         ChestGenHooks.BONUS_CHEST,

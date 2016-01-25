@@ -14,8 +14,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
-import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GeneralConfigs.NUM_INGREDIENTS;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModItems {
@@ -30,7 +32,7 @@ public class InitModItems {
     public static final ItemGoldenTreasures golden_chalice = null;
     public static final ItemGoldenTreasures golden_lantern = null;
     public static final ItemGoldenTreasures golden_feather = null;
-    public static final ItemGoldenTreasures golden_ingredient = null;
+    public static final ItemGoldenTreasures golden_crafting_component = null;
 
     public static void preInit() {
         LOGGER.debug("Initializing Items....");
@@ -46,7 +48,7 @@ public class InitModItems {
         registerItemIfEnabled(GoldenChalice.ITEM_ENABLED, new ItemGoldenChalice(), ReferencesModItems.GOLDEN_CHALICE);
         registerItemIfEnabled(GoldenLantern.ITEM_ENABLED, new ItemGoldenLantern(), ReferencesModItems.GOLDEN_LANTERN);
         registerItemIfEnabled(GoldenFeather.ITEM_ENABLED, new ItemGoldenFeather(), ReferencesModItems.GOLDEN_FEATHER);
-        GameRegistry.registerItem(new ItemGoldenIngredient(), ReferencesModItems.GOLDEN_INGREDIENT);
+        GameRegistry.registerItem(new ItemGoldenCraftingComponent(), ReferencesModItems.GOLDEN_CRAFTING_COMPONENT);
 
         LOGGER.log(Level.INFO, "Mod Items Initialized");
     }
@@ -56,7 +58,6 @@ public class InitModItems {
             GameRegistry.registerItem(item, name);
         }
     }
-
 
     public static void initDungeonLoot() {
         addIngredientsToDungeonLoot();
@@ -76,12 +77,13 @@ public class InitModItems {
     }
 
     private static void addIngredientsToDungeonLoot() {
-        for (int meta = 0; meta < NUM_INGREDIENTS; meta++) {
-            final WeightedRandomChestContent item = new WeightedRandomChestContent(
-                    new ItemStack(golden_ingredient, 1, meta), 2, 5, 10);
-            addItemToLootLists(item);
+        List<ItemStack> ingredients = new ArrayList<>();
+        golden_crafting_component.getSubItems(golden_crafting_component, null, ingredients);
+
+        for (ItemStack ingredient : ingredients) {
+            addItemToLootLists(new WeightedRandomChestContent(ingredient, 2, 5, 10));
         }
-    }
+     }
 
     private static void addItemToLootLists(WeightedRandomChestContent item) {
         for (String type : GeneralConfigs.DUNGEON_SPAWN_TYPES) {
