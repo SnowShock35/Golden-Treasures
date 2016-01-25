@@ -72,9 +72,11 @@ public class InitModItems {
     }
 
     private static void addItemToDungeonLoot(Item item, int chestSpawnChance) {
-        final WeightedRandomChestContent chestContent = new WeightedRandomChestContent(
-                new ItemStack(item, 1), 1, 1, chestSpawnChance);
-        addItemToLootLists(chestContent);
+        if(chestSpawnChance > 0) {
+            final WeightedRandomChestContent chestContent = new WeightedRandomChestContent(
+                    new ItemStack(item, 1), 1, 1, chestSpawnChance);
+            addItemToLootLists(chestContent);
+        }
     }
 
     private static void addIngredientsToDungeonLoot() {
