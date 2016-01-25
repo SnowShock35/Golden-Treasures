@@ -2,6 +2,7 @@ package net.snowshock.goldentreasures;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.config.Configuration;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
 import net.snowshock.goldentreasures.items.ItemGoldenMiner;
@@ -53,6 +54,19 @@ public class ConfigHandler {
         GeneralConfigs.NUM_INGREDIENTS = configuration.getInt("num_ingredients", category, 3, 3, 128,
                 "Advanced: Set the number of possible ingredients. Must created the specified number of ingredients in " +
                         "a resource pack with localised names and icons for this to work. For modpack authors only!");
+        GeneralConfigs.DUNGEON_SPAWN_TYPES = Arrays.asList(configuration.getStringList("dungeon_types", category,
+                new String[]{
+                        ChestGenHooks.DUNGEON_CHEST,
+                        ChestGenHooks.BONUS_CHEST,
+                        ChestGenHooks.VILLAGE_BLACKSMITH,
+                        ChestGenHooks.STRONGHOLD_LIBRARY,
+                        ChestGenHooks.STRONGHOLD_CORRIDOR,
+                        ChestGenHooks.STRONGHOLD_CROSSING,
+                        ChestGenHooks.PYRAMID_JUNGLE_CHEST,
+                        ChestGenHooks.PYRAMID_DESERT_CHEST,
+                        ChestGenHooks.MINESHAFT_CORRIDOR
+                },
+                "List of chest types to spawn items in, as used in ChestGenHooks. See the default list for examples."));
     }
 
     private static void loadGoldenFeatherSettings() {
@@ -65,6 +79,8 @@ public class ConfigHandler {
                 "How potent is the leaping effect. 1 = Just enough to jump a 2 block high wall).");
         GoldenFeather.HUNGER_MULTIPLIER = configuration.getFloat("hunger_multiplier", category, 1F, 0F, 9999F,
                 "Multiplier which affects the amount of hunger is consumed when negating fall damage");
+        GoldenFeather.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     private static void loadGoldenBombSettings() {
@@ -75,6 +91,8 @@ public class ConfigHandler {
         GoldenBomb.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
         GoldenBomb.DISPENSER_ENABLED = configuration.getBoolean("dispenser", category, true,
                 "true = bomb shoots from dispenser as if thrown. false = bomb dropped from dispensers as item.");
+        GoldenBomb.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     private static void loadGoldenFoodSettings() {
@@ -83,6 +101,8 @@ public class ConfigHandler {
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_FOOD_COMMENT);
 
         GoldenFood.ITEM_ENABLED = configuration.getBoolean("enabled", category, true, "Set to false to disable the item");
+        GoldenFood.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     private static void loadGoldenChaliceSettings() {
@@ -94,6 +114,8 @@ public class ConfigHandler {
 
         GoldenChalice.HUNGER_SATURATION_MULTIPLIER = configuration.getInt("hunger_satiation_multiplier", category, 4, 0, 9999,
                 "Multiplies the amount of saturation restored (and drowning damage taken) when drinking from the chalice.");
+        GoldenChalice.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     private static void loadGoldenLilypadSettings() {
@@ -109,6 +131,8 @@ public class ConfigHandler {
                 "Range at which the lilypad will operate at partial potency.");
         GoldenLilypad.FULL_POTENCY_RANGE = configuration.getInt("full_potency_range", category, 1, 1, 15,
                 "Range at which the lilypad will operate at full potency.");
+        GoldenLilypad.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     private static void loadGoldenMinerSettings() {
@@ -133,6 +157,8 @@ public class ConfigHandler {
                 "How many charges is one gunpowder worth.");
         GoldenMiner.GUNPOWDER_LIMIT = configuration.getInt("gunpowder_limit", category, 250, 0, 9999,
                 "How many gunpowder may be stored in internal storage.");
+        GoldenMiner.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     private static void loadGoldenStaffSettings() {
@@ -152,8 +178,9 @@ public class ConfigHandler {
         GoldenStaff.TORCHES = Arrays.asList(configuration.getStringList("torches", category, new String[]{},
                 "List of items (other than vanilla torch) supported as torches for the golden staff."));
         GoldenStaff.HUD_POSITION = configuration.getInt("hud_position", category, 3, 1, 4, "Position of HUD on screen");
+        GoldenStaff.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
-
 
     private static void loadGoldenLanternSettings() {
         final String category = ConfigCategories.GOLDEN_LANTERN;
@@ -168,6 +195,8 @@ public class ConfigHandler {
                 "How far to scan for torch placement.");
 //        TODO should probably implement only_place_on_visible_blocks even though the original didn't
 //        Reliquary.CONFIG.require(Names.lantern_of_paranoia, "only_place_on_visible_blocks", new ConfigReference(false));
+        GoldenLantern.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
 
     }
 
@@ -184,6 +213,8 @@ public class ConfigHandler {
                 "Distance the coin will pull items whilst activated.");
         GoldenCoin.AUDIO_DISABLED = configuration.getBoolean("audio_disabled", category, false,
                 "Disable audio when item is activated?");
+        GoldenCoin.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
 
@@ -213,6 +244,8 @@ public class ConfigHandler {
                 "List of entities that golden torch should ALWAYS push"));
         GoldenTorch.interdictionField = new InterdictionField(pushRadius, entityTypeConfiguration,
                 entityWhitelist, entityBlacklist);
+        GoldenTorch.CHEST_SPAWN_CHANCE = configuration.getInt("chest_probability", category, 1, 0, 100,
+                "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
     @SubscribeEvent

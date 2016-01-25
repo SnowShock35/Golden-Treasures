@@ -2,7 +2,6 @@ package net.snowshock.goldentreasures.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -15,8 +14,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GeneralConfigs.NUM_INGREDIENTS;
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
+import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.GeneralConfigs.NUM_INGREDIENTS;
 
 @GameRegistry.ObjectHolder(ReferencesModInfo.MOD_ID)
 public class InitModItems {
@@ -58,26 +57,37 @@ public class InitModItems {
         }
     }
 
+
     public static void initDungeonLoot() {
         addIngredientsToDungeonLoot();
+        addItemToDungeonLoot(golden_food, GoldenFood.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_bomb, GoldenBomb.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_coin, GoldenCoin.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_staff, GoldenStaff.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_miner, GoldenMiner.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_lantern, GoldenLantern.CHEST_SPAWN_CHANCE);
+        addItemToDungeonLoot(golden_feather, GoldenFeather.CHEST_SPAWN_CHANCE);
+    }
+
+    private static void addItemToDungeonLoot(Item item, int chestSpawnChance) {
+        final WeightedRandomChestContent chestContent = new WeightedRandomChestContent(
+                new ItemStack(item, 1), 1, 1, chestSpawnChance);
+        addItemToLootLists(chestContent);
     }
 
     private static void addIngredientsToDungeonLoot() {
         for (int meta = 0; meta < NUM_INGREDIENTS; meta++) {
-            final WeightedRandomChestContent item = new WeightedRandomChestContent(new ItemStack(golden_ingredient, 1, meta), 3, 5, 10);
+            final WeightedRandomChestContent item = new WeightedRandomChestContent(
+                    new ItemStack(golden_ingredient, 1, meta), 2, 5, 10);
             addItemToLootLists(item);
         }
     }
 
     private static void addItemToLootLists(WeightedRandomChestContent item) {
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST).addItem(item);
-        ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(item);
+        for (String type : GeneralConfigs.DUNGEON_SPAWN_TYPES) {
+            final ChestGenHooks typeInfo = ChestGenHooks.getInfo(type);
+            if (typeInfo != null)
+                typeInfo.addItem(item);
+        }
     }
 }
