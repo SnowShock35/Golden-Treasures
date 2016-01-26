@@ -10,4 +10,5 @@ public class ReferencesModInfo {
     public static final String LOGO_PATH = "assets/goldentreasures/textures/golden-treasures-alt.png";
     public static final String CLIENT_PROXY_CLASS = "net.snowshock.goldentreasures.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "net.snowshock.goldentreasures.CommonProxy";
+    public static final String GUI_FACTORY_CLASS = "net.snowshock.goldentreasures.client.gui.GuiFactory";
 }

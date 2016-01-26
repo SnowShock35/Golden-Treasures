@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = ReferencesModInfo.MOD_ID, name = ReferencesModInfo.MOD_NAME, version = ReferencesModInfo.VERSION, acceptedMinecraftVersions = "[1.7.10]")
+@Mod(modid = ReferencesModInfo.MOD_ID, name = ReferencesModInfo.MOD_NAME, version = ReferencesModInfo.VERSION, acceptedMinecraftVersions = "[1.7.10]", guiFactory = ReferencesModInfo.GUI_FACTORY_CLASS)
 public class GoldenTreasures {
 
     @Mod.Instance(ReferencesModInfo.MOD_ID)

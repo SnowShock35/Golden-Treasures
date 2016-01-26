@@ -1,48 +1,64 @@
 package net.snowshock.goldentreasures;
 
+import cpw.mods.fml.client.config.IConfigElement;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
 import net.snowshock.goldentreasures.items.ItemGoldenMiner;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.utils.EntityHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.snowshock.goldentreasures.references.ReferencesConfigInfo.*;
 
 
 public class ConfigHandler {
+    private static final Logger LOGGER = LogManager.getLogger(ReferencesModInfo.MOD_ID + ".Config");
+
+
     public static Configuration configuration;
 
     public static void preInit(File configFile) {
         if (configuration == null) {
             configuration = new Configuration(configFile);
+        }
+        loadConfiguration();
+    }
+
+    @SubscribeEvent
+    public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.modID.equalsIgnoreCase(ReferencesModInfo.MOD_ID)) {
             loadConfiguration();
         }
     }
 
     private static void loadConfiguration() {
-        loadGeneralSettings();
-        loadGoldenTorchSettings();
-        loadGoldenCoinSettings();
-        loadGoldenLanternSettings();
-        loadGoldenStaffSettings();
-        loadGoldenMinerSettings();
-        loadGoldenLilypadSettings();
-        loadGoldenChaliceSettings();
-        loadGoldenBombSettings();
-        loadGoldenFoodSettings();
-        loadGoldenFeatherSettings();
-
-        if (configuration.hasChanged()) {
-            configuration.save();
+        try {
+            loadGeneralSettings();
+            loadGoldenTorchSettings();
+            loadGoldenCoinSettings();
+            loadGoldenLanternSettings();
+            loadGoldenStaffSettings();
+            loadGoldenMinerSettings();
+            loadGoldenLilypadSettings();
+            loadGoldenChaliceSettings();
+            loadGoldenBombSettings();
+            loadGoldenFoodSettings();
+            loadGoldenFeatherSettings();
+        } catch (Exception e) {
+            LOGGER.error("Failed to load configuration.");
+            throw new RuntimeException("Failed to load Golden Treasures configuration.", e);
+        } finally {
+            if (configuration.hasChanged()) {
+                configuration.save();
+            }
         }
     }
 
@@ -250,10 +266,11 @@ public class ConfigHandler {
                 "How likely is this item to spawn in a random chest. Higher number = more spawns. 0 = no spawns.");
     }
 
-    @SubscribeEvent
-    public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.modID.equalsIgnoreCase(ReferencesModInfo.MOD_ID)) {
-            loadConfiguration();
+    public static List<IConfigElement> getConfigElements() {
+        List<IConfigElement> elements = new ArrayList<>();
+        for (String categoryName : configuration.getCategoryNames()) {
+            elements.add(new ConfigElement(configuration.getCategory(categoryName)));
         }
+        return elements;
     }
 }
