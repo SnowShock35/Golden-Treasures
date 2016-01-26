@@ -13,25 +13,25 @@ public class ReferencesConfigInfo {
     public static final class ConfigCategories {
         public static final String GENERAL = "General";
         public static final String GENERAL_COMMENT = "General configuration options for the mod";
-        public static final String GOLDEN_TORCH = "GoldenTorch";
+        public static final String GOLDEN_TORCH = "Items.GoldenTorch";
         public static final String GOLDEN_TORCH_COMMENT = "Configuration options for the golden torch.";
-        public static final String GOLDEN_COIN = "GoldenCoin";
+        public static final String GOLDEN_COIN = "Items.GoldenCoin";
         public static final String GOLDEN_COIN_COMMENT = "Configuration options for the golden coin.";
-        public static final String GOLDEN_LANTERN = "GoldenLantern";
+        public static final String GOLDEN_LANTERN = "Items.GoldenLantern";
         public static final String GOLDEN_LANTERN_COMMENT = "Configuration options for the golden lantern.";
-        public static final String GOLDEN_STAFF = "GoldenStaff";
+        public static final String GOLDEN_STAFF = "Items.GoldenStaff";
         public static final String GOLDEN_STAFF_COMMENT = "Configuration options for the golden staff.";
-        public static final String GOLDEN_MINER = "GoldenMiner";
+        public static final String GOLDEN_MINER = "Items.GoldenMiner";
         public static final String GOLDEN_MINER_COMMENT = "Configuration options for the golden miner.";
-        public static final String GOLDEN_LILYPAD = "GoldenLilypad";
+        public static final String GOLDEN_LILYPAD = "Items.GoldenLilypad";
         public static final String GOLDEN_LILYPAD_COMMENT = "Configuration options for the golden lilypad.";
-        public static final String GOLDEN_CHALICE = "GoldenChalice";
+        public static final String GOLDEN_CHALICE = "Items.GoldenChalice";
         public static final String GOLDEN_CHALICE_COMMENT = "Configuration options for the golden chalice.";
-        public static final String GOLDEN_FOOD = "GoldenFood";
+        public static final String GOLDEN_FOOD = "Items.GoldenFood";
         public static final String GOLDEN_FOOD_COMMENT = "Configuration options for the golden food.";
-        public static final String GOLDEN_BOMB = "GoldenBomb";
+        public static final String GOLDEN_BOMB = "Items.GoldenBomb";
         public static final String GOLDEN_BOMB_COMMENT = "Configuration options for the golden bomb.";
-        public static final String GOLDEN_FEATHER = "GoldenFeather";
+        public static final String GOLDEN_FEATHER = "Items.GoldenFeather";
         public static final String GOLDEN_FEATHER_COMMENT = "Configuration options for the Golden Feather.";
     }
 
