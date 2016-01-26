@@ -4,8 +4,10 @@ import cpw.mods.fml.client.config.IConfigElement;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.snowshock.goldentreasures.interdiction.InterdictionField;
 import net.snowshock.goldentreasures.items.ItemGoldenMiner;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
@@ -25,7 +27,7 @@ public class ConfigHandler {
 
     public static Configuration configuration;
 
-    public static void preInit(File configFile) {
+    public static void preInit(final File configFile) {
         if (configuration == null) {
             configuration = new Configuration(configFile);
         }
@@ -33,7 +35,7 @@ public class ConfigHandler {
     }
 
     @SubscribeEvent
-    public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+    public void onConfigurationChangedEvent(final ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.modID.equalsIgnoreCase(ReferencesModInfo.MOD_ID)) {
             loadConfiguration();
         }
@@ -41,6 +43,7 @@ public class ConfigHandler {
 
     private static void loadConfiguration() {
         try {
+            LOGGER.info("Loading configuration....");
             loadGeneralSettings();
             loadGoldenTorchSettings();
             loadGoldenCoinSettings();
@@ -52,20 +55,68 @@ public class ConfigHandler {
             loadGoldenBombSettings();
             loadGoldenFoodSettings();
             loadGoldenFeatherSettings();
+            LOGGER.info("Loaded!");
         } catch (Exception e) {
             LOGGER.error("Failed to load configuration.");
             throw new RuntimeException("Failed to load Golden Treasures configuration.", e);
         } finally {
             if (configuration.hasChanged()) {
+                LOGGER.info("Configuration has changed. Saving....");
                 configuration.save();
+                LOGGER.debug("Saved!");
+            }
+
+            logLoadedConfiguration(configuration);
+        }
+    }
+
+    private static void logLoadedConfiguration(final Configuration configuration) {
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("Loaded configuration [{}]", configuration.toString());
+            final Set<String> categoryNames = getTopLevelCategoryNames(configuration);
+            for (String categoryName : categoryNames) {
+                final ConfigCategory category = configuration.getCategory(categoryName);
+                logCategory(category, 0);
             }
         }
     }
 
+    private static Set<String> getTopLevelCategoryNames(Configuration configuration) {
+        final Set<String> categoryNames = configuration.getCategoryNames();
+        final Set<String> topLevelCategoryNames = new HashSet<>(categoryNames);
+        for (String categoryName : categoryNames) {
+            if(categoryName.contains("."))
+                topLevelCategoryNames.remove(categoryName);
+        }
+        return topLevelCategoryNames;
+    }
+
+    private static void logCategory(final ConfigCategory category, final int level) {
+        final String indent = getIndent(level);
+        LOGGER.trace("{}Category: [{}] {", indent, category.getName());
+        for (ConfigCategory subCategory : category.getChildren()) {
+            logCategory(subCategory, level + 1);
+        }
+        for (Property property : category.getOrderedValues()) {
+            LOGGER.trace("{}\t[{}} -> [{}]", indent, property.getName(), property.getString());
+        }
+        LOGGER.trace("{}}\n", indent);
+    }
+
+    private static String getIndent(final int level) {
+        StringBuilder builder = new StringBuilder("\t");
+        for(int index = 0; index < level; index++)
+            builder.append("\t");
+
+        return builder.toString();
+    }
+
     private static void loadGeneralSettings() {
         final String category = ConfigCategories.GENERAL;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryComment(category, ConfigCategories.GENERAL_COMMENT);
         configuration.setCategoryRequiresMcRestart(category, true);
+
 
         GeneralConfigs.NUM_CRAFTING_COMPONENTS = configuration.getInt("num_crafting_components", category, 3, 3, 128,
                 "Advanced: Set the number of possible crafting components. To create a custom component that " +
@@ -89,6 +140,7 @@ public class ConfigHandler {
 
     private static void loadGoldenFeatherSettings() {
         final String category = ConfigCategories.GOLDEN_FEATHER;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_FEATHER_COMMENT);
 
@@ -103,6 +155,7 @@ public class ConfigHandler {
 
     private static void loadGoldenBombSettings() {
         final String category = ConfigCategories.GOLDEN_BOMB;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_BOMB_COMMENT);
 
@@ -115,6 +168,7 @@ public class ConfigHandler {
 
     private static void loadGoldenFoodSettings() {
         final String category = ConfigCategories.GOLDEN_FOOD;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_FOOD_COMMENT);
 
@@ -125,6 +179,7 @@ public class ConfigHandler {
 
     private static void loadGoldenChaliceSettings() {
         final String category = ConfigCategories.GOLDEN_CHALICE;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_CHALICE_COMMENT);
 
@@ -138,6 +193,7 @@ public class ConfigHandler {
 
     private static void loadGoldenLilypadSettings() {
         final String category = ConfigCategories.GOLDEN_LILYPAD;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_LILYPAD_COMMENT);
 
@@ -155,6 +211,7 @@ public class ConfigHandler {
 
     private static void loadGoldenMinerSettings() {
         final String category = ConfigCategories.GOLDEN_MINER;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_MINER_COMMENT);
 
@@ -181,6 +238,7 @@ public class ConfigHandler {
 
     private static void loadGoldenStaffSettings() {
         final String category = ConfigCategories.GOLDEN_STAFF;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_STAFF_COMMENT);
 
@@ -202,6 +260,7 @@ public class ConfigHandler {
 
     private static void loadGoldenLanternSettings() {
         final String category = ConfigCategories.GOLDEN_LANTERN;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_LANTERN_COMMENT);
 
@@ -220,6 +279,7 @@ public class ConfigHandler {
 
     private static void loadGoldenCoinSettings() {
         final String category = ConfigCategories.GOLDEN_COIN;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(category, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_COIN_COMMENT);
 
@@ -238,6 +298,7 @@ public class ConfigHandler {
 
     private static void loadGoldenTorchSettings() {
         final String category = ConfigCategories.GOLDEN_TORCH;
+        LOGGER.debug("Loading configuration category [{}]", category);
         configuration.setCategoryRequiresMcRestart(ConfigCategories.GOLDEN_TORCH, true);
         configuration.setCategoryComment(category, ConfigCategories.GOLDEN_TORCH_COMMENT);
 
