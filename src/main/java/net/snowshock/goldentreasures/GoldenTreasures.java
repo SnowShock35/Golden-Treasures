@@ -58,10 +58,7 @@ public class GoldenTreasures {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         LOGGER.log(Level.INFO, "Post Initialization: Starting...");
-        LOGGER.debug("Warning: Pointless Message!");
-        if (Minecraft.isRunningOnMac) {
-            LOGGER.log(Level.ERROR, "Mac User Detected! Exterminate! Exterminate! Exterminate!");
-        }
+        
         LOGGER.log(Level.INFO, "Post Initialization: Complete");
     }
 }
