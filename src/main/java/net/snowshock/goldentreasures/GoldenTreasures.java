@@ -7,7 +7,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.snowshock.goldentreasures.references.ReferencesModInfo;
 import net.snowshock.goldentreasures.utils.MetadataHelper;
@@ -58,7 +57,6 @@ public class GoldenTreasures {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         LOGGER.log(Level.INFO, "Post Initialization: Starting...");
-        
         LOGGER.log(Level.INFO, "Post Initialization: Complete");
     }
 }
