@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -72,6 +73,11 @@ public class ItemGoldenTreasures extends Item {
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack stack) {
         return LanguageHelper.getLocalization(this.getUnlocalizedNameInefficiently(stack) + ".name");
+    }
+
+    @Override
+    public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
+        super.getSubItems(p_150895_1_, p_150895_2_, p_150895_3_);
     }
 
     protected boolean showTooltipsAlways() {

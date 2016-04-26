@@ -19,10 +19,8 @@ import static net.snowshock.goldentreasures.references.ReferencesModItems.GOLDEN
 public class ItemGoldenCraftingComponent extends ItemGoldenTreasures {
 
     public static final String ID_TAG = "component_id";
-    @SideOnly(Side.CLIENT)
+
     public IIcon[] icons = new IIcon[NUM_CRAFTING_COMPONENTS];
-
-
 
     public ItemGoldenCraftingComponent() {
         super();
@@ -80,7 +78,6 @@ public class ItemGoldenCraftingComponent extends ItemGoldenTreasures {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public void getSubItems(final Item item, final CreativeTabs tab, final List list) {
         for (int id = 0; id < NUM_CRAFTING_COMPONENTS; id++) {
             list.add(createSubItem(item, id));
