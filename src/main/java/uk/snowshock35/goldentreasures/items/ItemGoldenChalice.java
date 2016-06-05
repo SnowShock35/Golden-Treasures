@@ -76,7 +76,7 @@ public class ItemGoldenChalice extends ItemGoldenTreasuresTogglable {
 
     @Override
     public ItemStack onEaten(ItemStack ist, World world, EntityPlayer player) {
-        if (world.isRemote)
+        if (world.isRemote || player.capabilities.isCreativeMode)
             return ist;
 
             int multiplier = getHungerSaturationMultiplier();
