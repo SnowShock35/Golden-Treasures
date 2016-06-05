@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
@@ -76,7 +75,7 @@ public class ItemGoldenChalice extends ItemGoldenTreasuresTogglable {
 
     @Override
     public ItemStack onEaten(ItemStack ist, World world, EntityPlayer player) {
-        if (world.isRemote)
+        if (world.isRemote) // No Creative drink doesn't work (Removed ` || !players.capabilities.isCreativeMode()` from if statement
             return ist;
 
             int multiplier = getHungerSaturationMultiplier();
