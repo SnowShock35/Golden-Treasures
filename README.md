@@ -7,6 +7,7 @@ A slimmed-down and updated version of Xeno's Reliquary for Minecraft 1.7.10
 [![Minecraft CurseForge Downloads (Total)](https://cf.way2muchnoise.eu/full_239372_downloads.svg?badge_style=for_the_badge)](https://curseforge.com/minecraft/mc-mods/golden-treasures)
 [![Minecraft CurseForge Minecraft Versions](https://cf.way2muchnoise.eu/versions/239372.svg?badge_style=for_the_badge)](https://curseforge.com/minecraft/mc-mods/golden-treasures)
 
+[![LICENSE](https://img.shields.io/github/license/snowshock35/golden-treasures?style=for-the-badge)](https://github.com/snowshock35/golden-treasures/blob/master/LICENSE)
 [![Discord](https://img.shields.io/discord/284709326189494282?color=7289da&label=Discord&style=for-the-badge)](https://discord.gg/H4FUqrj)
 
 ## Description
