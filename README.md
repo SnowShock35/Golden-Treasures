@@ -14,29 +14,29 @@ A slimmed-down and updated version of Xeno's Reliquary for Minecraft 1.7.10
 
 ### Introduction
 
-Golden Treasures is slimmed-down and updated version of Xeno's reliquary for Minecraft 1.7.10. At the time, Reliquary was abandonant and was becoming more and more unstable as Forge continued to update. As a result of this, myself and other devs took it upon ourselves to recreate a slimmed down version of Reliquary for Obscurity.
+Golden Treasures is a slimmed-down and updated version of Xeno's reliquary for Minecraft 1.7.10. At the time, Reliquary was abandoned and was becoming more and more unstable as Forge continued to update. As a result of this, myself and other devs took it upon ourselves to recreate a slimmed-down version of Reliquary for Obscurity.
 
-Reliquary has since been fully ported by another developer called P3pp3rF1y. As a result of this, Golden Treasures is depracated in favour of using P3pp3rF1y's port. You can find that on [GitHub](https://github.com/P3pp3rF1y/Reliquary) or [CurseForge](https://curseforge.com/minecraft/mc-mods/reliquary-v1-3).
+Reliquary has since been fully ported by another developer called P3pp3rF1y. As a result of this, Golden Treasures is deprecated in favour of using P3pp3rF1y's port. You can find that on [GitHub](https://github.com/P3pp3rF1y/Reliquary) or [CurseForge](https://curseforge.com/minecraft/mc-mods/reliquary-v1-3).
 
 ## Release Notes
 
-Release Notes (or changelogs) for Golden Treasures are availabl under the [files tab](https://curseforge.com/minecraft/mc-mods/golden-treasures/files) on CurseForge.
+Release Notes (or changelogs) for Golden Treasures are available under the [files tab](https://curseforge.com/minecraft/mc-mods/golden-treasures/files) on CurseForge.
 
 ## Join our Discord
 
-Our Discord community is a great place to chat with others and get insight on SnowShock's latest mods and packs. [Join our Discord Server](https://discord.gg/H4FUqrj).
+Our Discord community is a great place to chat with others and get insight into SnowShock's latest mods and packs. [Join our Discord Server](https://discord.gg/H4FUqrj).
 
 [![Discord Server](https://cdn.snowshock35.com/misc/discord-logo_wordmark_black_sm.png)](https://discord.gg/H4FUqrj)
 
 ## Support me on Patreon
 
-Want to support me? Consider becoming a patreon supporter by clicking the banner below.
+Want to support me? Consider becoming a Patreon supporter by clicking the banner below.
 
 [![Support me on Patreon](https://cdn.snowshock35.com/misc/patreon_wordmark_black_sm.png)](https://patreon.com/snowshock35)
 
 ## Server Hosting
 
-Thanks to the wonderful people at CreeperHost, you can receive **15% off** your first month hosting. Just click the banner below or use the code `snowshock35xbe` to receive your 1 month discount.
+Thanks to the wonderful people at CreeperHost, you can receive **15% off** your first-month hosting. Just click the banner below or use the code `snowshock35xbe` to receive your 1-month discount.
 
 [![CreeperHost Discount](https://cdn.snowshock35.com/misc/ch_snowshock35xbe.png)](http://partners.creeper.host/r/snowshock35xbe)
 
